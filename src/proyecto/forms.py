@@ -1,0 +1,37 @@
+from django import forms
+
+from proyecto.models import proyecto, Galeria
+
+
+class ProyectoForm(forms.ModelForm):
+#ogo = forms.ImageField()
+#galeria_imagenes = forms.ImageField()
+	class Meta:
+		model = proyecto
+
+		fields = [
+			'titulo',
+			'logo',
+			'descripcion_general',
+			'descripcion_detallada',
+			'definicion_problema',
+			'definicion_solucion',
+			'galeria_imagenes',
+			'video',
+		]
+		labels = {
+			'titulo': 'Nombre del Proyecto',
+		#	'logo' : 'Logo',
+			'descripcion_general': 'Descripcion General',
+			'descripcion_detallada': 'Descripcion Detallada',
+			'definicion_problema':'Definicion del Problema',
+			'definicion_solucion': 'Definicion de la Solucion',
+		#   'galeria_imagenes' : 'Galeria de Imagenes',
+		}
+		widgets = {
+			'titulo': forms.TextInput(attrs={'class':'form-control'}),
+			'descripcion_detallada': forms.TextInput(attrs={'class':'form-control'}),
+			'descripcion_general': forms.TextInput(attrs={'class':'form-control'}),
+			'definicion_problema': forms.TextInput(attrs={'class':'form-control'}),
+			'definicion_solucion': forms.TextInput(attrs={'class':'form-control'}),
+		}
