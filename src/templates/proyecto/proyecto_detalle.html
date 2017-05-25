@@ -69,8 +69,7 @@
                                             <li>By: <span class="text-theme-colored">{{ user.username }}</span></li>
                                         </ul>
                                     </div>
-                                    <p class="mb-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur dolores nesciunt vitae nulla tempora cumque eum ab labore beatae accusamus. Consectetur distinctio sit laboriosam expedita nisi soluta amet id.
-                                        Amet libero modi optio tempora unde a, diston odio sunt neque, natus expedita quibusdam dignis dolor pariatur esse ipsum corrupti, aliquid officia nam hic cum voluptates eius diston odio sunt neque</p>
+                                    <p class="mb-20">{{proyecto.descripcion_general}}</p>
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -109,7 +108,7 @@
          </div>-->
          <div class="col-md-9">
            <div id="section-one" class="mb-50">
-             <h2>Descripcion General</h2>
+             <h2>Descripcion Detallada</h2>
              <hr>
              <p class="mb-20">{{proyecto.descripcion_detallada}}</p>
            </div>
@@ -221,4 +220,8 @@
     <!-- end main-content -->
     <!--Redes sociales-->
     <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="box_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
-    <br><br> {% endblock%}
+    <br><br>
+<center>
+<a class="hvr-icon-back pl-40" href="{% url 'proyecto:proyecto_listar' %}">Volver</a>
+</center>
+    {% endblock%}

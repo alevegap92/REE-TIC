@@ -30,8 +30,8 @@ class ProyectoForm(forms.ModelForm):
 		}
 		widgets = {
 			'titulo': forms.TextInput(attrs={'class':'form-control'}),
-			'descripcion_detallada': forms.TextInput(attrs={'class':'form-control'}),
-			'descripcion_general': forms.TextInput(attrs={'class':'form-control'}),
-			'definicion_problema': forms.TextInput(attrs={'class':'form-control'}),
-			'definicion_solucion': forms.TextInput(attrs={'class':'form-control'}),
+			'descripcion_detallada': forms.Textarea(attrs={'class':'form-control'}),
+			'descripcion_general': forms.Textarea(attrs={'class':'form-control'}),
+			'definicion_problema': forms.Textarea(attrs={'class':'form-control'}),
+			'definicion_solucion': forms.Textarea(attrs={'class':'form-control'}),
 		}

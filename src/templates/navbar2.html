@@ -8,15 +8,6 @@
           <a class="menuzord-brand" href="javascript:void(0)">
             <img src="images/logo-wide.png" alt="">
           </a>
-          <ul class="menuzord-menu onepage-nav">
-            <li class="active"><a href="#home">Home</a> </li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#causes">Causes</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#clients">Clients</a></li>
-            <li><a href="#blog">News</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if request.user.is_authenticated %}
             <li><a href="{% url 'auth_logout' %}">Salir</a></li>
@@ -25,6 +16,12 @@
             <!-- <li><a href="{% url 'auth_login' %}">Entrar</a></li> -->
             {% endif %}
           </ul>
+          <ul class="menuzord-menu onepage-nav">
+            <li class="active"><a href="#home">Inicio</a> </li>
+            <li><a href="#causes">Proyecto</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+
           {% if not request.user.is_authenticated and not "/accounts/login" in request.get_full_path %}
           <form class='navbar-form navbar-right' method='POST' action='{% url "auth_login" %}'>{% csrf_token %}
             <div class='form-group'>
