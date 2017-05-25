@@ -1,7 +1,17 @@
 from django import forms
 
-from proyecto.models import proyecto, Galeria
+from proyecto.models import proyecto, Galeria, Comment
 
+class CommentForm(forms.ModelForm):
+
+    text = forms.CharField(label='',
+                            min_length=5,
+                            widget=forms.Textarea,
+                            )
+
+    class Meta:
+        model = Comment
+        fields = ('text',)
 
 class ProyectoForm(forms.ModelForm):
 #ogo = forms.ImageField()
@@ -23,9 +33,9 @@ class ProyectoForm(forms.ModelForm):
 			'titulo': 'Nombre del Proyecto',
 		#	'logo' : 'Logo',
 			'descripcion_general': 'Descripcion General',
-			'descripcion_detallada': 'Descripcion Detallada',
+			'descripcion_detallada': 'Visión general del negocio',
 			'definicion_problema':'Definicion del Problema',
-			'definicion_solucion': 'Definicion de la Solucion',
+			'definicion_solucion': 'Solucion propuesta',
 		#   'galeria_imagenes' : 'Galeria de Imagenes',
 		}
 		widgets = {

@@ -4,6 +4,7 @@ from django.utils import timezone
 
 from embed_video.fields import EmbedVideoField
 # Create your models here.
+
 class Galeria(models.Model):
     titulo = models.CharField(max_length=100)
     descripcion_imagen = models.CharField(max_length=500)
@@ -28,3 +29,12 @@ class proyecto(models.Model):
 
     def __str__(self): #Python 3
         return self.titulo
+
+class Comment(models.Model):
+    user_comment = models.ForeignKey(settings.AUTH_USER_MODEL, default=None)
+    post_comment = models.ForeignKey(proyecto, default=None)
+    text = models.TextField(max_length=500)
+#    date = models.DateField(default=datetime.today(), blank=True)
+
+    def __str__(self): #Python 3
+        return self.id
