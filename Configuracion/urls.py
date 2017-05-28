@@ -17,14 +17,20 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-
-# from boletin.views import inicio
+#registro de usuario adaptado
+#from django import forms
+#from cuentas.forms import ProfileForm
+#from registration.backends.default.views import RegistrationView
+from users.regbackend import MyRegistrationView
 
 urlpatterns = [
-
     url(r'^admin/', admin.site.urls),
+    #url(r'^accounts/register/$', RegistrationView.as_view(form_class = ProfileForm), name='registration_register'),
+    url(r'^accounts/register/$', MyRegistrationView.as_view(),
+        name='registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^', include('proyecto.urls', namespace='proyecto')),
+    #url(r'^', include('usuarios.urls', namespace='usuarios')),
 ]
 
 if settings.DEBUG:

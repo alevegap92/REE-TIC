@@ -27,15 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'otro@gmail.com'
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-'''
-Para usar gmail hay que desbloquear captcha
-https://accounts.google.com/displayunlockcaptcha
-'''
 
 # Application definition
 
@@ -46,12 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #contrib
+    'django.contrib.sites',
     #apps terceros
     'crispy_forms',
     'registration',
     'embed_video',
     #mis apps
     'proyecto',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -100,6 +94,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
+#----------PERFIL DE USUARIO------------------#
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -114,7 +109,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+
 ]
+#----------PERFIL DE USUARIO------------------#
+
 
 
 # Internationalization
@@ -122,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Santiago'
 
 USE_I18N = True
 
@@ -134,16 +132,33 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+#----------ARCHIVOS ESTATICOS GENERALES-------#
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
+#--------------IMAGENES-----------------------#
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+#-----------USUARIO AUTENTICADO----------------#
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'ravp92@gmail.com'
+EMAIL_HOST_PASSWORD = '59897565323156rico'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+'''
+Para usar gmail hay que desbloquear captcha
+https://accounts.google.com/displayunlockcaptcha
+'''
 
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 
+
+#AUTH_USER_MODEL = 'usuarios.User'
+
+#-----------FORMULARIOS----------------#
+#No se ha ocupado
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

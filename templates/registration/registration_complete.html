@@ -2,5 +2,24 @@
 {% load i18n %}
 
 {% block content %}
+{% load crispy_forms_tags %}
+
+<!--
+<br></br><br></br>
+<form method="post">
+	<div class='row'>
+		<div class='col-sm-6 col-sm-offset-3'>
+			<form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+			{{ form|crispy }}
+			<input type='submit' class='btn btn-default' value='Crear'/>
+			<a class="hvr-icon-back pl-40" href="{% url 'proyecto:proyecto_listar' %}">Volver</a>
+			</form>
+    </div>
+    </div>
+</form>
+
+-->
+
 <p class='lead'>{% trans "Te has registrado correctamente. Un email con un enlace para activar tu cuenta te ha sido enviado." %}</p>
+
 {% endblock %}

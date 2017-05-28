@@ -13,7 +13,6 @@
     }(document, 'script', 'facebook-jssdk'));
 </script>
 <!-- Facebook end-plugins -->
-<br></BR><BR></BR>
 <section class="inner-header divider layer-overlay overlay-dark" data-bg-img="http://www.robotixmallorca.com/images/proyecto/Robotix-6.JPG">
     <div class="container pt-30 pb-30">
         <!-- Section Content -->
@@ -29,6 +28,7 @@
                         {% endif %}
                         <li><a href="/">Incio</a></li>
                         <li><a href="/todos">Proyectos</a></li>
+                        <li>Creado: <span class="text-theme-colored">{{proyecto.creacion}}</span></li>
                     </ol>
                 </div>
             </div>
@@ -60,7 +60,8 @@ Imagen saltarina
                                     {% endif %}
                                     <div class="entry-meta">
                                         <ul class="list-inline">
-                                            <li>Posted: <span class="text-theme-colored">26 Oct 2015</span></li>
+
+<li>Actualizado: <span class="text-theme-colored">{{proyecto.actualizacion}}</span></li>
                                             <li>By: <span class="text-theme-colored">{{ user.username }}</span></li>
                                         </ul>
                                     </div>

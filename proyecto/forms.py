@@ -4,8 +4,7 @@ from proyecto.models import proyecto, Galeria
 
 
 class ProyectoForm(forms.ModelForm):
-#ogo = forms.ImageField()
-#galeria_imagenes = forms.ImageField()
+	#galeria_imagenes = forms.ImageField()
 	class Meta:
 		model = proyecto
 
