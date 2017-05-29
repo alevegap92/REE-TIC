@@ -1,6 +1,9 @@
 from django.db import models
 from django.conf import settings
+<<<<<<< HEAD
 from django.utils import  timezone
+=======
+>>>>>>> e2ceb4a335e393d6f7eb3dc5bded029d1816553f
 #cargar video
 from embed_video.fields import EmbedVideoField
 # Create your models here.
@@ -29,6 +32,7 @@ class proyecto(models.Model):
 
     def __str__(self): #Python 3
         return self.titulo
+<<<<<<< HEAD
 
 class Comment(models.Model):
     proyecto = models.ForeignKey('proyecto.proyecto', related_name='comments', default="")
@@ -37,3 +41,5 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.text
+=======
+>>>>>>> e2ceb4a335e393d6f7eb3dc5bded029d1816553f

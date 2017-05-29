@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 #Modelo proyecto
 from proyecto.models import proyecto, Galeria
 from proyecto.forms import ProyectoForm, CommentForm
+=======
+from django.shortcuts import render
+#Modelo proyecto
+from proyecto.models import proyecto, Galeria
+from proyecto.forms import ProyectoForm
+>>>>>>> e2ceb4a335e393d6f7eb3dc5bded029d1816553f
 #Vistas
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -76,16 +83,30 @@ class proyectoDelete(DeleteView):
 	template_name = 'proyecto/proyecto_delete.html'
 	success_url = reverse_lazy('proyecto:proyecto_listar')
 
+<<<<<<< HEAD
 @login_required
 def agregar_comentario(request, pk):
     proyecto_instancia = get_object_or_404(proyecto, pk=pk)
+=======
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(proyecto, pk=pk)
+>>>>>>> e2ceb4a335e393d6f7eb3dc5bded029d1816553f
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
+<<<<<<< HEAD
             comment.proyecto = proyecto_instancia
             comment.save()
             return redirect('proyecto:proyecto_detalle', pk=proyecto_instancia.pk)
     else:
         form = CommentForm()
     return render(request, 'proyecto/agregar_comentario.html', {'form': form})
+=======
+            comment.post = post
+            comment.save()
+            return redirect('proyecto_detalle', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'proyecto/add_comment_to_post.html', {'form': form})
+>>>>>>> e2ceb4a335e393d6f7eb3dc5bded029d1816553f

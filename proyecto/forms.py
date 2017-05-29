@@ -1,6 +1,10 @@
 from django import forms
 
+<<<<<<< HEAD
 from proyecto.models import proyecto, Galeria, Comment
+=======
+from proyecto.models import proyecto, Galeria
+>>>>>>> e2ceb4a335e393d6f7eb3dc5bded029d1816553f
 
 
 class ProyectoForm(forms.ModelForm):
@@ -34,6 +38,7 @@ class ProyectoForm(forms.ModelForm):
 			'definicion_problema': forms.Textarea(attrs={'class':'form-control'}),
 			'definicion_solucion': forms.Textarea(attrs={'class':'form-control'}),
 		}
+<<<<<<< HEAD
 
 
 class CommentForm(forms.ModelForm):
@@ -41,3 +46,5 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('text',)
+=======
+>>>>>>> e2ceb4a335e393d6f7eb3dc5bded029d1816553f
