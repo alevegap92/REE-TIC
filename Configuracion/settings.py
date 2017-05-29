@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'embed_video',
     #mis apps
     'proyecto',
-    'users',
+    'cuenta',
 ]
 
 MIDDLEWARE = [

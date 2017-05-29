@@ -21,7 +21,7 @@ from django.contrib import admin
 #from django import forms
 #from cuentas.forms import ProfileForm
 #from registration.backends.default.views import RegistrationView
-from users.regbackend import MyRegistrationView
+from cuenta.regbackend import MyRegistrationView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,7 +30,7 @@ urlpatterns = [
         name='registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^', include('proyecto.urls', namespace='proyecto')),
-    #url(r'^', include('usuarios.urls', namespace='usuarios')),
+    url(r'^', include('cuenta.urls', namespace='cuenta')),
 ]
 
 if settings.DEBUG:

@@ -19,3 +19,13 @@ class Profile(models.Model):
         max_length=10,
         choices=TIPO_USUARIO
     )
+    def __unicode__(self):
+        return "{0}".format(self.user.username)
+    def __str__(self): #Python 3
+        return self.user.username
+    def get_profile(self):
+        return self.user.id
+    def get_nombre(self):
+        return self.fist_name
+    def get_foto(self):
+        return self.foto
