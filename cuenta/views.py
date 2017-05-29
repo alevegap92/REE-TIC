@@ -9,6 +9,7 @@ from django.views.generic.detail import DetailView
 # Create your views here.
 
 #CLASES  PARA Profile
+#Class detail no se ha ocupado todavia.
 class ProfileDetail(DetailView):
 	model = Profile
 	template_name = 'navbar3.html'

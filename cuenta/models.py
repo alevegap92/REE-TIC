@@ -23,6 +23,8 @@ class Profile(models.Model):
         return "{0}".format(self.user.username)
     def __str__(self): #Python 3
         return self.user.username
+    def get_profile2(self):
+        return self.user.profile.id
     def get_profile(self):
         return self.user.id
     def get_nombre(self):

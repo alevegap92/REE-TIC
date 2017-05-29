@@ -25,12 +25,12 @@ from cuenta.regbackend import MyRegistrationView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    #url(r'^accounts/register/$', RegistrationView.as_view(form_class = ProfileForm), name='registration_register'),
     url(r'^accounts/register/$', MyRegistrationView.as_view(),
         name='registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^', include('proyecto.urls', namespace='proyecto')),
-    url(r'^', include('cuenta.urls', namespace='cuenta')),
+    url(r'^accounts/', include('cuenta.urls', namespace='cuenta')),
+    #url(r'^accounts/register/$', RegistrationView.as_view(form_class = ProfileForm), name='registration_register'),
 ]
 
 if settings.DEBUG:

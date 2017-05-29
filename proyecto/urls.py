@@ -4,9 +4,7 @@ from proyecto import views
 from proyecto.views import proyectoList, proyectoCreate, proyectoUpdate, proyectoDelete, proyectoDetail, index, proyectoList2
 
 urlpatterns = [
-    #url(r'^$', index, name='index'),
     url(r'^nuevo$', login_required(proyectoCreate.as_view()), name='proyecto_crear'),
-    #url(r'^listar$', proyectoList.as_view(), name='proyecto_listar'),
     url(r'^$', proyectoList.as_view(), name='proyecto_listar'),
     url(r'^todos$', proyectoList2.as_view(), name='proyecto_listar0'),
     url(r'^(?P<pk>\d+)$', proyectoDetail.as_view(), name='proyecto_detalle'),

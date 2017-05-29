@@ -50,8 +50,9 @@
                                         </div>
                                     </div>
                                 </li>
+
                                 <li class="divider navbar-login-session-bg"></li>
-                                <li><a href="#">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
+                                <li><a href="accounts/{{user.profile.get_profile}}/editar">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
                                 <li class="divider"></li>
                                 <!--
                   <li><a href="#">User stats <span class="glyphicon glyphicon-stats pull-right"></span></a></li>
@@ -123,3 +124,39 @@
 {% endif %}
 <!-- Fin Vista Usuario -->
 <!-- Edicion Vista Usuario -->
+{% if request.user.is_authenticated %}
+<div class="modal fade" id="profile_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">{{ request.user.profile.fist_name }} {{ request.user.profile.apellido1 }} {{ request.user.profile.apellido2 }}</h4>
+
+            </div>
+            <div class="modal-body">
+                <center>
+                    <img alt="" src="{{ user.profile.foto.url }}" class='img-responsive img-circle' width="300" height="200" />
+
+                    <div class="separator right">
+                        <i class="fa fa-graduation-cap"></i>
+                    </div>
+                    <p>
+                      <strong>Curso: {{ request.user.profile.curso }}° Grado</strong>
+                        <h3><span class="glyphicon glyphicon-education"> Colegio {{request.user.profile.colegio }}</span></h3></p>
+
+                    <h5><span class="glyphicon glyphicon-envelope">  {{request.user.email }}</span></h5>
+                    <h5><span class="glyphicon glyphicon-phone"> {{request.user.profile.telefono }}</span></h5>
+                    <small>USUARIO {{ request.user.profile.tipo_usuario }}</span></small>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <!--  <button type="button" class="btn btn-primary">
+                    Save changes
+                </button>-->
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<!-- Fin edicion profile de usuario -->
