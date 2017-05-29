@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {% block content %}
+<!-- Section: Causes -->
+<section id="causes">
+      <div class="container pb-80">
+        <div class="section-title text-center">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <h3 class="text-uppercase mt-0">Proyectos</h3>
+              <div class="title-icon">
+                <i class="flaticon-charity-hand-holding-a-heart"></i>
+              </div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
+            </div>
+          </div>
+        </div>
+    <div class="row">
+        {% if object_list %} {% for proyecto in object_list %}
+        <div class="col-sm-10 col-lg-3">
+
+            <div class="causes bg-lighter box-hover-effect effect1 maxwidth500 mb-sm-30">
+
+                <div class="thumbnail">
+                  {% if obj.imagen %}
+                  <img src='{{ obj.imagen.url }}' class='img-responsive' />
+                  {% endif %}
+                  <img class="img-fullwidth" alt="" href="{% url 'proyecto:proyecto_detalle' proyecto.id %}" src="http://placehold.it/265x195">
+                </div>
+                <div class="progress-item mt-0">
+                    <div class="progress mb-0">
+                        <div class="progress-bar" data-percent="84"></div>
+                    </div>
+                </div>
+
+                <a class="btn btn-default btn-sm" href="{% url 'proyecto:proyecto_detalle' proyecto.id %}"><span class="glyphicon glyphicon-eye-open"></span></a>
+               {% if request.user.is_authenticated %}
+                <form action="{% url 'proyecto:proyecto_editar' proyecto.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="proyeto_id" value="{{ proyecto.id }}" />
+                    <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-wrench"></span>
+                                </button>
+                </form>
+                <form action="{% url 'proyecto:proyecto_eliminar' proyecto.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="proyeto_id" value="{{ proyecto.id }}" />
+                    <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                </form>
+                {% endif %}
+                <div class="causes-details clearfix border-bottom p-15 pt-10">
+                    <h5><a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}">{{ proyecto.titulo }}</a></h5>
+                    <p>{{ proyecto.descripcion_general }}</p>
+
+                    <ul class="list-inline clearfix mt-20">
+                        <li class="pull-left pr-0">Raised: $1890</li>
+                        <li class="text-theme-colored pull-right pr-0">Goal: $2500</li>
+                    </ul>
+                </div>
+                <div class="mt-10">
+                    <a class="btn btn-dark btn-theme-colored btn-flat btn-sm pull-left mt-10" href="#">Donate</a>
+                    <div class="pull-right mt-15"><i class="fa fa-heart-o text-theme-colored"></i> 89 Donors</div>
+                </div>
+            </div>
+
+        </div>
+
+        {% endfor %} {% else %} {% if request.user.is_authenticated %}
+        <div class="col-sm-12">
+            <br>
+            <a href="{% url 'proyecto:proyecto_crear' %}">
+                <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus">Crear Proyecto</span>
+                    </button>
+            </br>
+            </a>
+        </div>
+        {% endif %} {% endif %}
+
+
+    </div>
+
+</section>
+<ul class="pager">
+    <li>
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a> {% endif %}
+    </li>
+    <li>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a> {% endif %}
+    </li>
+</ul>
+{% endblock%}

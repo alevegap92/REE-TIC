@@ -1,0 +1,244 @@
+{% extends 'base.html' %} {% block content %}
+<!-- Section: home -->
+<section id="home" class="divider parallax" data-stellar-background-ratio="0.5" data-bg-img="http://www.robotixmallorca.com/images/proyecto/Robotix-6.JPG">
+    <div class="display-table">
+        <div class="display-table-cell">
+            <div class="container pt-200 pb-200">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="bg-lightest-transparent text-center pt-60 pb-60">
+                            <h1 class="text-white text-uppercase font-60">RED <span class="text-theme-colored">Emprendimiento Escolar</span></h1>
+                            <h4 class="text-white font-weight-400">Every day we bring hope to millions of children in the world's <br>hardest places as a sign of God's unconditional love.</h4> {% if request.user.is_authenticated %}
+                            <a href="{% url 'proyecto:proyecto_crear' %}">
+
+                                <button type="button" class="btn btn-primary btn-lg hvr-float-shadow btn btn-colored btn-theme-colored btn-flat smooth-scroll-to-target">Crear Proyecto</button>
+                            </a>
+                            {% else %}
+                            <a href="{% url 'registration_register' %}">
+                          
+                                <button type="button" class="btn btn-primary btn-lg hvr-float-shadow btn btn-colored btn-theme-colored btn-flat smooth-scroll-to-target">
+                        Registrarse
+                      </button> </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Section: Causes -->
+<section id="causes">
+    <div class="container pb-80">
+        <div class="section-title text-center">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h3 class="text-uppercase mt-0" href="{% url 'proyecto:proyecto_listar0' %}">Proyectos</h3>
+                    <div class="title-icon">
+                        <i class="flaticon-charity-hand-holding-a-heart"></i>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% if object_list %} {% for proyecto in object_list %}
+            <div class="col-sm-10 col-lg-3">
+
+                <div class="causes bg-lighter box-hover-effect effect1 maxwidth500 mb-sm-30">
+
+                    <div class="thumbnail">
+                        {% if proyecto.logo %}
+                        <a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}">
+                            <img class="img-fullwidth" alt="" src="{{ proyecto.logo.url }}" width="265" height="195" class='img-responsive' /> {% else %}
+                            <img class="img-fullwidth" alt="" href="{% url 'proyecto:proyecto_detalle' proyecto.id %}" src="http://placehold.it/265x195"> {% endif %}
+                    </div>
+                    <div class="progress-item mt-0">
+                        <div class="progress mb-0">
+                            <div class="progress-bar" data-percent="84"></div>
+                        </div>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                    <a class="btn btn-default btn-sm" href="{% url 'proyecto:proyecto_detalle' proyecto.id %}"><span class="glyphicon glyphicon-eye-open"></span></a>
+                    <a class="btn btn-default btn-sm" href="{% url 'proyecto:proyecto_editar' proyecto.id %}"><span class="glyphicon glyphicon-wrench"></span></a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'proyecto:proyecto_eliminar' proyecto.id %}"><span class="glyphicon glyphicon-trash"></span></a> {% endif %}
+                    <div class="causes-details clearfix border-bottom p-15 pt-10">
+                        <h5><a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}">{{ proyecto.titulo }}</a></h5>
+                        <p>{{ proyecto.descripcion_general }}</p>
+
+                        <ul class="list-inline clearfix mt-20">
+                            <li class="pull-left pr-0">Raised: $1890</li>
+                            <li class="text-theme-colored pull-right pr-0">Goal: $2500</li>
+                        </ul>
+                    </div>
+                    <div class="mt-10">
+                        <a class="btn btn-dark btn-theme-colored btn-flat btn-sm pull-left mt-10" href="#">Donate</a>
+                        <div class="pull-right mt-15"><i class="fa fa-heart-o text-theme-colored"></i> 89 Donors</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            {% endfor %} {% else %} {% if request.user.is_authenticated %}
+            <div class="col-sm-12">
+                <br>
+                <a href="{% url 'proyecto:proyecto_crear' %}">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus">Crear Proyecto</span>
+                    </button>
+                </a>
+                </br>
+            </div>
+            {% endif %} {% endif %}
+
+        </div>
+</section>
+<ul class="pager theme-colored">
+    <li>
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Anterior</a> {% endif %}
+    </li>
+    <li>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Siguiente</a> {% endif %}
+    </li>
+</ul>
+
+<!-- Separador -->
+<div class="separator right">
+    <i class="fa fa-graduation-cap"></i>
+</div>
+<!-- Section: Contact -->
+<section id="contact">
+    <div class="container pt-70">
+        <div class="section-title text-center">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h3 class="text-uppercase mt-0">Contact Us</h3>
+                    <div class="title-icon">
+                        <i class="flaticon-charity-hand-holding-a-heart"></i>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
+                </div>
+            </div>
+        </div>
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="icon-box left media bg-deep p-30 mb-20">
+                                <a class="media-left pull-left" href="#"> <i class="pe-7s-map-2 text-theme-colored"></i></a>
+                                <div class="media-body"> <strong>OUR OFFICE LOCATION</strong>
+                                    <p>#405, Lan Streen, Los Vegas, USA</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-12">
+                            <div class="icon-box left media bg-deep p-30 mb-20">
+                                <a class="media-left pull-left" href="#"> <i class="pe-7s-call text-theme-colored"></i></a>
+                                <div class="media-body"> <strong>OUR CONTACT NUMBER</strong>
+                                    <p>+325 12345 65478</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-12">
+                            <div class="icon-box left media bg-deep p-30 mb-20">
+                                <a class="media-left pull-left" href="#"> <i class="pe-7s-mail text-theme-colored"></i></a>
+                                <div class="media-body"> <strong>OUR CONTACT E-MAIL</strong>
+                                    <p>supporte@yourdomin.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-12">
+                            <div class="icon-box left media bg-deep p-30 mb-20">
+                                <a class="media-left pull-left" href="#"> <i class="fa fa-skype text-theme-colored"></i></a>
+                                <div class="media-body"> <strong>Make a Video Call</strong>
+                                    <p>ThemeMascotSkype</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h3 class="mt-0 mb-30">Interested in discussing?</h3>
+                    <!-- Contact Form -->
+                    <form id="contact_form" name="contact_form" class="" action="includes/sendmail.php" method="post">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="form_name">Name <small>*</small></label>
+                                    <input id="form_name" name="form_name" class="form-control" type="text" placeholder="Enter Name" required="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="form_email">Email <small>*</small></label>
+                                    <input id="form_email" name="form_email" class="form-control required email" type="email" placeholder="Enter Email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="form_name">Subject <small>*</small></label>
+                                    <input id="form_subject" name="form_subject" class="form-control required" type="text" placeholder="Enter Subject">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="form_phone">Phone</label>
+                                    <input id="form_phone" name="form_phone" class="form-control" type="text" placeholder="Enter Phone">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="form_name">Message</label>
+                            <textarea id="form_message" name="form_message" class="form-control required" rows="5" placeholder="Enter Message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input id="form_botcheck" name="form_botcheck" class="form-control" type="hidden" value="" />
+                            <button type="submit" class="btn btn-dark btn-theme-colored btn-flat mr-5" data-loading-text="Please wait...">Send your message</button>
+                            <button type="reset" class="btn btn-default btn-flat btn-theme-colored">Reset</button>
+                        </div>
+                    </form>
+
+                    <!-- Contact Form Validation-->
+                    <script type="text/javascript">
+                        $("#contact_form").validate({
+                            submitHandler: function(form) {
+                                var form_btn = $(form).find('button[type="submit"]');
+                                var form_result_div = '#form-result';
+                                $(form_result_div).remove();
+                                form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
+                                var form_btn_old_msg = form_btn.html();
+                                form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
+                                $(form).ajaxSubmit({
+                                    dataType: 'json',
+                                    success: function(data) {
+                                        if (data.status == 'true') {
+                                            $(form).find('.form-control').val('');
+                                        }
+                                        form_btn.prop('disabled', false).html(form_btn_old_msg);
+                                        $(form_result_div).html(data.message).fadeIn('slow');
+                                        setTimeout(function() {
+                                            $(form_result_div).fadeOut('slow')
+                                        }, 6000);
+                                    }
+                                });
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock%}
