@@ -21,28 +21,16 @@ from django.contrib import admin
 #from django import forms
 #from cuentas.forms import ProfileForm
 #from registration.backends.default.views import RegistrationView
-<<<<<<< HEAD
-from users.regbackend import MyRegistrationView
-
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    #url(r'^accounts/register/$', RegistrationView.as_view(form_class = ProfileForm), name='registration_register'),
-=======
 from cuenta.regbackend import MyRegistrationView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
->>>>>>> e2ceb4a335e393d6f7eb3dc5bded029d1816553f
     url(r'^accounts/register/$', MyRegistrationView.as_view(),
         name='registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^', include('proyecto.urls', namespace='proyecto')),
-<<<<<<< HEAD
-    #url(r'^', include('usuarios.urls', namespace='usuarios')),
-=======
     url(r'^accounts/', include('cuenta.urls', namespace='cuenta')),
     #url(r'^accounts/register/$', RegistrationView.as_view(form_class = ProfileForm), name='registration_register'),
->>>>>>> e2ceb4a335e393d6f7eb3dc5bded029d1816553f
 ]
 
 if settings.DEBUG:

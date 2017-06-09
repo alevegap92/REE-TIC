@@ -22,7 +22,7 @@
                     <h2 class="text-theme-colored font-36">{{ proyecto.titulo }}</h2>
                     <ol class="breadcrumb text-center mt-10 white">
 
-                        {% if request.user.is_authenticated %}
+                        {% if request.user.is_authenticated and user.profile.tipo_usuario == "ESTUDIANTE" and user == proyecto.usuario %}
                         <a class="btn btn-default btn-sm" href="{% url 'proyecto:proyecto_editar' proyecto.id %}"><span class="glyphicon glyphicon-wrench"></span></a>
                         <a class="btn btn-danger btn-sm" href="{% url 'proyecto:proyecto_eliminar' proyecto.id %}"><span class="glyphicon glyphicon-trash"></span></a>
                         {% endif %}
@@ -54,7 +54,7 @@ Imagen saltarina
 <img class="wow rubberBand" data-wow-duration="1.5s" data-wow-offset="10" src="http://placehold.it/520x259" alt="">   -->
                                     {% if proyecto.logo %}
                                     <a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}">
-                                        <img class="wow rubberBand" data-wow-duration="1.5s" data-wow-offset="10" src="{{ proyecto.logo.url }}" width="100" height="100" class="img-responsive" alt="">
+                                        <img class="wow rubberBand" data-wow-duration="1.5s" data-wow-offset="10" src="media/Logos" width="100" height="100" class="img-responsive" alt="">
                                     {% else %}
                                         <p>Sin imagen</p>
                                     {% endif %}
@@ -62,7 +62,7 @@ Imagen saltarina
                                         <ul class="list-inline">
 
 <li>Actualizado: <span class="text-theme-colored">{{proyecto.actualizacion}}</span></li>
-                                            <li>By: <span class="text-theme-colored">{{ user.username }}</span></li>
+                                            <li>By: <span class="text-theme-colored">{{ proyecto.usuario }}</span></li>
                                         </ul>
                                     </div>
                                     <p class="mb-20">{{proyecto.descripcion_general}}</p>
@@ -191,24 +191,9 @@ Imagen saltarina
                             </a>
                         </div>
                     </div>
-<<<<<<< HEAD
-                </div>
-            </div>
-              <a class="btn btn-default" href="{% url 'proyecto:agregar_comentario' pk=proyecto.pk %}">Comentar el proyecto</a>
-                        {% for comment in proyecto.comments.all %}
-                <div class="comment">
-                    <div class="date">{{ comment.fecha_creacion }}</div>
-                    <strong>{{ comment.usuario }}</strong>
-                    <p>{{ comment.text|linebreaks }}</p>
-                </div>
-            {% empty %}
-                <p>No comments here yet :(</p>
-            {% endfor %}
-=======
 
                 </div>
             </div>
->>>>>>> e2ceb4a335e393d6f7eb3dc5bded029d1816553f
             <div class="mt-30 mb-0">
                 <h5 class="pull-left mt-10 mr-20 text-theme-colored">Comparte:</h5>
                 <ul class="styled-icons icon-circled m-0">
@@ -220,13 +205,9 @@ Imagen saltarina
             <!-- Facebook Comments plugin -->
 
 
-<<<<<<< HEAD
-        
-=======
             <h3 id="comments-title"><span><fb:comments-count href="http://kodesolution.com/demo/corporate/CharityFund/html/v1.2/blog-single-facebook-comments.html"></fb:comments-count></span> Comments</h3>
 
             <div class="fb-comments" data-width="100%" data-href="" data-numposts="5" data-colorscheme="light"></div>
->>>>>>> e2ceb4a335e393d6f7eb3dc5bded029d1816553f
             <!-- Facebook Comments end -->
         </div>
         </div>

@@ -45,11 +45,7 @@ INSTALLED_APPS = [
     'embed_video',
     #mis apps
     'proyecto',
-<<<<<<< HEAD
-    'users',
-=======
     'cuenta',
->>>>>>> e2ceb4a335e393d6f7eb3dc5bded029d1816553f
 ]
 
 MIDDLEWARE = [
