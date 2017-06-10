@@ -16,6 +16,24 @@ class proyecto(models.Model):
     video = EmbedVideoField(blank=True)
     creacion = models.DateTimeField(auto_now_add=True)
     actualizacion = models.DateTimeField(auto_now=True)
+    donate = models.IntegerField()
 
+    def __unicode__(self):
+        return unicode(self.usuario)
     def __str__(self): #Python 3
         return self.titulo
+
+class Picture(models.Model):
+    picture = models.ImageField(upload_to='proyecto_pictures', blank=True)
+    proyecto_picture = models.ForeignKey(proyecto)
+
+    def __unicode__(self):
+        return unicode(self.id)
+
+class Comment(models.Model):
+    user_comment = models.ForeignKey(User)
+    post_comment = models.ForeignKey(proyecto)
+    text = models.TextField(max_length=500)
+
+    def __unicode__(self):
+        return unicode(self.id)

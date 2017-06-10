@@ -1,6 +1,6 @@
 from django import forms
-
-from proyecto.models import proyecto
+from datetime import date
+from .models import proyecto
 
 
 class ProyectoForm(forms.ModelForm):

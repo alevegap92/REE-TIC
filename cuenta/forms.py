@@ -1,4 +1,5 @@
 from registration.forms import RegistrationFormUniqueEmail
+from django.core.validators import RegexValidator
 from django import forms
 from .models import Profile
 
@@ -17,3 +18,5 @@ class ProfileForm(RegistrationFormUniqueEmail):
     colegio = forms.CharField(label="Colegio")
     curso = forms.IntegerField(label="Curso: primero medio es 9, segundo medio es 10, etc")
     foto = forms.ImageField(label="Foto perfil")
+    #phone_regex = RegexValidator(regex=r'^\+?1?\d{8,15}$', message="El numero ingresado no es del formato: '+999999999' o no esta entre 9 y 15 digitos.")
+    #phone = forms.CharField(validators=[phone_regex], label='Telefono')
