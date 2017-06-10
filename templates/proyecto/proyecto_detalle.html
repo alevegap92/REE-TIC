@@ -75,13 +75,20 @@ Imagen saltarina
                                             <div class="progress-bar" data-percent="85"></div>
                                         </div>
                                     </div>
+                                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="3NZKRFNCYEQSC">
+<input type="image" src="https://www.paypalobjects.com/es_XC/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+</form>
+
                                     <ul class="list-inline clearfix">
                                         <li class="pull-left pr-0">Raised: $1890</li>
                                         <li class="pull-right pr-0"><i class="fa fa-heart-o text-theme-colored"></i> 89 Donors</li>
                                     </ul>
                                     <div class="mt-10">
                                         <ul class="pull-left list-inline mt-20">
-                                            <li class="text-theme-colored pr-0">Goal: $2500</li>
+                                            <li class="text-theme-colored pr-0">Monto a recaudar {{proyecto.donate}}</li>
                                         </ul>
                                         <a href="#" class="btn btn-dark btn-flat btn-sm pull-right mt-15">Donate</a>
                                     </div>
@@ -220,7 +227,53 @@ Imagen saltarina
     <!--Redes sociales-->
     <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="box_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
     <br><br>
+
+   
 <center>
 <a class="hvr-icon-back pl-40" href="{% url 'proyecto:proyecto_listar' %}">Volver</a>
 </center>
+
+
+
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="3NZKRFNCYEQSC">
+<input type="image" src="https://www.paypalobjects.com/es_XC/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-push-3">
+            <h4 class="mt-0 pt-5"> Make One-Time Donation with Paypal</h4>
+            <p>Thank you for making a donation to our charitable organization. Please use the form below to pay your desired giving amount.</p>
+            <hr>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+              <div class="form-group">
+                <label><strong>How much do you want to donate?</strong></label>
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input type="text" value="100" placeholder="Enter Amount" id="amount" name="amount" class="form-control" required="">
+                </div>
+              </div>
+              <input type="hidden" name="cmd" value="_donations">
+              <input type="hidden" name="business" value="ravp92@gmail.com">
+              <input type="hidden" name="item_name" value={{proyecto.titulo}}>
+              <input type="hidden" name="no_shipping" value="1">
+              <input type="hidden" name="cn" value="Comments...">
+              <input type="hidden" name="currency_code" value="USD">
+              <input type="hidden" name="tax" value="0">
+              <input type="hidden" name="lc" value="US">
+              <input type="hidden" name="bn" value="PP-DonationsBF">
+              <input type="hidden" name="return" value="http://www.yoursite.com/thankyou.html">
+              <input type="hidden" name="cancel_return" value="http://www.yoursite.com/paymentcancel.html">
+              <input type="hidden" name="notify_url" value="http://www.yoursite.com/notifypayment.php">
+              <input type="image" src="https://www.paypalobjects.com/es_XC/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
+              <img alt="" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
     {% endblock%}

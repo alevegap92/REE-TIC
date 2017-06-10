@@ -67,16 +67,38 @@
                     <a class="btn btn-default btn-sm" href="{% url 'proyecto:proyecto_editar' proyecto.id %}"><span class="glyphicon glyphicon-wrench"></span></a>
                     <a class="btn btn-danger btn-sm" href="{% url 'proyecto:proyecto_eliminar' proyecto.id %}"><span class="glyphicon glyphicon-trash"></span></a> {% endif %}
                     <div class="causes-details clearfix border-bottom p-15 pt-10">
-                        <h5><a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}">{{ proyecto.titulo }}</a></h5>
+                        <h5><a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}"><p>{{ proyecto.titulo }}</a></p></h5>
                         <p>{{ proyecto.descripcion_general }}</p>
 
                         <ul class="list-inline clearfix mt-20">
                             <li class="pull-left pr-0">Raised: $1890</li>
-                            <li class="text-theme-colored pull-right pr-0">Goal: $2500</li>
+                            <li class="text-theme-colored pull-right pr-0">Monto: {{proyecto.donate}}</li>
                         </ul>
                     </div>
                     <div class="mt-10">
-                        <a class="btn btn-dark btn-theme-colored btn-flat btn-sm pull-left mt-10" href="#">Donate</a>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+              <div class="form-group">
+                <label><strong>Cuanto quieres donar?</strong></label>
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input type="text" value="100" placeholder="Enter Amount" id="amount" name="amount" class="form-control" required="">
+                </div>
+              </div>
+              <input type="hidden" name="cmd" value="_donations">
+              <input type="hidden" name="business" value="ravp92@gmail.com">
+              <input type="hidden" name="item_name" value={{proyecto.titulo}}>
+              <input type="hidden" name="no_shipping" value="1">
+              <input type="hidden" name="cn" value="Comments...">
+              <input type="hidden" name="currency_code" value="USD">
+              <input type="hidden" name="tax" value="0">
+              <input type="hidden" name="lc" value="US">
+              <input type="hidden" name="bn" value="PP-DonationsBF">
+              <input type="hidden" name="return" value="http://www.yoursite.com/thankyou.html">
+              <input type="hidden" name="cancel_return" value="http://www.yoursite.com/paymentcancel.html">
+              <input type="hidden" name="notify_url" value="http://www.yoursite.com/notifypayment.php">
+              <button type="submit" class="btn btn-dark btn-theme-colored btn-flat btn-sm pull-left  data-loading-text="Please wait...">Donate Now</button>
+            </form>
+
                         <div class="pull-right mt-15"><i class="fa fa-heart-o text-theme-colored"></i> 89 Donors</div>
                     </div>
                 </div>

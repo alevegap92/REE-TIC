@@ -14,11 +14,12 @@ class Profile(models.Model):
     telefono = models.CharField(max_length=8, blank=True)
     colegio = models.CharField(max_length=200, blank=True)
     curso = models.IntegerField(blank=True)
-    foto= models.ImageField(upload_to = 'estudiantes',null=True,blank=True)
+    foto= models.ImageField(upload_to='estudiantes',blank=True)
     tipo_usuario= models.CharField(
         max_length=10,
         choices=TIPO_USUARIO
     )
+
     def __unicode__(self):
         return "{0}".format(self.user.username)
     def __str__(self): #Python 3

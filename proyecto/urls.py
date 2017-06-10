@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib.auth.decorators import login_required
 from proyecto import views
-from proyecto.views import proyectoList, proyectoCreate, proyectoUpdate, proyectoDelete, proyectoDetail, proyectoList2
+from .views import proyectoList, proyectoCreate, proyectoUpdate, proyectoDelete, proyectoDetail, proyectoList2
 
 urlpatterns = [
     url(r'^nuevo$', login_required(proyectoCreate.as_view()), name='proyecto_crear'),

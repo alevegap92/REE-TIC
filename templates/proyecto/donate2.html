@@ -1,0 +1,41 @@
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+<input type="hidden" name="cmd" value="_ext-enter" />
+<input type="hidden" name="redirect_cmd" value="_xclick" />
+<input type="hidden" name="business" value="ravp92@gmail.com" />
+<!--   Aquí pondriamos el email de usuario de la cuenta de vendedor de Paypal o el nº de usuario de Paypal  -->
+
+<input type="hidden" name="item_name" value={{proyecto.titulo}} />
+<!--   Aquí debemos de poner el nombre del producto para poder identificarlo -->
+<!-- 
+<input type="hidden" name="item_number" value="Numero de referencia del producto" />
+  Nº de referencia del procuto, este campo es simplemente informativo -->
+
+<input type="hidden" name="quantity" value="2″ />
+<!--   Cantidad de producto a cobrar. En este ejemplo he puesto dos, es decir, multiplicara por 2 la catidad que viene aquí debajo -->
+
+<input type="hidden" name="amount" value="14.99″ />
+<!--   Precio de cada producto -->
+
+<input type="hidden" name="currency_code" value="EUR" />
+<!--   Tipo de moneda en la que se va a cobrar al cliente o pagador -->
+
+<input type="hidden" name="return" value="https://www.nutecoweb.com/return.html>" />
+<!--   URL o dirección a la cual nos redirigirá Paypal despues de terminar la compra satisfactoriamente -->
+
+<input type="hidden" name="notify_url" value="https://www.nutecoweb.com/ok.php" />
+<!---   Esta URL es donde podemos poner un archivo PHP, que pueda procesar la compra una vez que se realice desde Pyapla sin tener que pasar por nuestra web. Por ejemplo mandar un email, añadir a una BBDD. es decir, este archivo o url es el que procesa realmente la compra en nuestra pagina web -->
+
+<input type="hidden" name="cancel_return" value="https://www.nutecoweb.com/cancel.php" />
+<!--   URL o dirección a la cual nos redirigirá Paypal si se produce un error en el pago o el cliente lo cancela -->
+
+<input type="hidden" name="no_shipping" value="1″ />
+<input type="hidden" name="shipping" value="5.00″ />
+<!--  insertamos los gastos de envio. En este ejemplo hemos puesto 5 euros -->
+
+<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest" />
+
+<input type="image" src="imagenes/pago.png" border="0″ name="submit" alt="Pagar para completar la compra." />
+<!-- Aquí ponemos la imagen de nuestro botón de paypal personalizado. Si no sabeis o no os apetece crear uno, hacer una búsqueda en google de botones -->
+
+</form>
