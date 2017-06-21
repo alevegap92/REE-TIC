@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve as serve_static_files
 from django.contrib import admin
 #registro de usuario adaptado
 #from django import forms
@@ -29,10 +30,20 @@ urlpatterns = [
         name='registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^', include('proyecto.urls', namespace='proyecto')),
+
+    url(r'^likes/', include('likes.urls')),
     url(r'^accounts/', include('cuenta.urls', namespace='cuenta')),
     #url(r'^accounts/register/$', RegistrationView.as_view(form_class = ProfileForm), name='registration_register'),
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += [
+    url(
+        r'^media/(?P<path>.*)$',
+        serve_static_files,
+        {'document_root': settings.MEDIA_ROOT}
+    )
+]
+    #urlpatterns += patterns('django.views.static',(r'media/(?P<path>.*)','serve',{'document_root': settings.MEDIA_ROOT}),)
+    #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    #urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

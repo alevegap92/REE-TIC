@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    {% if message %}
+      <div class='alert alert-info'>
+        {{ message }}
+      </div>
+    {% endif %}
+    <body>
+
+
+             <div class="tab-pane" id="tab_2">
+                    <div class="portlet box green">
+
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                                <form name="myForm" id="usuario" method="post" action="/publish/" enctype="multipart/form-data" class="form-horizontal" onsubmit="return validateForm()">
+                                    {% csrf_token %}
+                                    <div class="form-body">
+                                        <h3 class="form-section">Información de publicación</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Titulo</label>
+                                                    <div class="col-md-9">
+                                                        {{ post_form.titulo }}
+                                                        {{ post_form.titulo.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/row-->
+                                                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Logo</label>
+                                                    <div class="col-md-9">
+                                                       {{ post_form.logo }}
+                                                       {{ post_form.logo.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group ">
+                                                    <label class="control-label col-md-3">Descripción General</label>
+                                                    <div class="col-md-9">
+                                                        {{ post_form.descripcion_general}}
+                                                        {{ post_form.descripcion_general.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                                                                    <!--/row-->
+                                        
+                                            <div class="col-md-6">
+                                                <div class="form-group ">
+                                                    <label class="control-label col-md-3">Descripción Detallada</label>
+                                                    <div class="col-md-9">
+                                                        {{ post_form.descripcion_detallada|add_class:"form-control" }}
+                                                        {{ post_form.descripcion_detallada.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--/span-->
+                                                                                    <!--/row-->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group ">
+                                                    <label class="control-label col-md-3">Definicion del Problema</label>
+                                                    <div class="col-md-9">
+                                                        {{ post_form.definicion_problema|add_class:"form-control" }}
+                                                        {{ post_form.definicion_problema.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--/span-->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Definicion de la solucion</label>
+                                                    <div class="col-md-9">
+                                                        {{ post_form.definicion_solucion|add_class:"form-control" }}
+                                                        {{ post_form.definicion_solucion.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                                                                        <!--/span-->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Video</label>
+                                                    <div class="col-md-9">
+                                                        {{ post_form.video |add_class:"form-control" }}
+                                                        {{ post_form.video.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+
+                                                                                        <!--/span-->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">donate</label>
+                                                    <div class="col-md-9">
+                                                        {{ post_form.donate|add_class:"form-control" }}
+                                                        {{ post_form.donate.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                        </div>
+<body>
+    
+    <form enctype="multipart/form-data" id="formuploadajax" method="post">
+        Nombre: <input type="text" name="nombre" placeholder="Escribe tu nombre">
+        <br />
+        <input  type="file" id="archivo1" name="archivo1"/>
+        <br />
+        <input  type="file" id="archivo2" name="archivo2"/>
+        <br />
+        <input type="submit" value="Subir archivos"/>
+    </form>
+    <div id="mensaje"></div>
+    
+    
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script>
+    $(function(){
+        $("#formuploadajax").on("submit", function(e){
+            e.preventDefault();
+            var f = $(this);
+            var formData = new FormData(document.getElementById("formuploadajax"));
+            formData.append("dato", "valor");
+            //formData.append(f.attr("name"), $(this)[0].files[0]);
+            $.ajax({
+                url: "recibe.php",
+                type: "post",
+                dataType: "html",
+                data: formData,
+                cache: false,
+                contentType: false,
+         processData: false
+            })
+                .done(function(res){
+                    $("#mensaje").html("Respuesta: " + res);
+                });
+        });
+    });
+    </script>
+</body>                             <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3">Fotos de proyecto</label>
+                                                    <div class="col-md-9">
+                                                       {{ picture_form.picture }}
+                                                       {{ picture_form.picture.errors }}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+  <!--/span-->
+
+
+                                        </div>
+                                        <!--/row-->
+                                    </div>
+                                    <div class="form-actions">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-offset-3 col-md-9">
+                                                        <button type="submit" class="btn green">Publicar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+             </div>
+
+    </body>
+
+
+
+
+{% endblock %}

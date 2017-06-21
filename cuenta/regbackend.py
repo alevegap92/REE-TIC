@@ -8,6 +8,7 @@ class MyRegistrationView(RegistrationView):
     form_class = ProfileForm
 
     def register(self, form_class):
+        #nuevo_usuaro=ProfileForm(data=request.POST)
         new_user = super(MyRegistrationView, self).register(form_class)
         tipo_usuario = form_class.cleaned_data['tipo_usuario']
         fist_name = form_class.cleaned_data['fist_name']
@@ -18,6 +19,10 @@ class MyRegistrationView(RegistrationView):
         colegio = form_class.cleaned_data['colegio']
         curso = form_class.cleaned_data['curso']
         foto = form_class.cleaned_data['foto']
+        nuevo_usuaro = new_user.save(commit=False)
+        if 'foto' in request.FILES:
+            nuevo_usuaro.foto = request.FILES['foto']
+
         new_profile = Profile.objects.create(user=new_user,tipo_usuario=tipo_usuario,fist_name=fist_name,apellido1=apellido1,apellido2=apellido2,rut=rut,telefono=telefono,colegio=colegio,curso=curso,foto=foto)
         new_profile.save()
         return new_user

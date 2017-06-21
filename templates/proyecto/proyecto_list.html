@@ -54,7 +54,7 @@
                     <div class="thumbnail">
                         {% if proyecto.logo %}
                         <a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}">
-                            <img class="img-fullwidth" alt="" src="{{ proyecto.logo.url }}" width="265" height="195" class='img-responsive' /> {% else %}
+                            <img class="img-fullwidth" idth="265" height="195" alt="" src="{{ proyecto.logo.url }}" w class='img-responsive' /> {% else %}
                             <img class="img-fullwidth" alt="" href="{% url 'proyecto:proyecto_detalle' proyecto.id %}" src="http://placehold.it/265x195"> {% endif %}
                     </div>
                     <div class="progress-item mt-0">
@@ -76,37 +76,34 @@
                         </ul>
                     </div>
                     <div class="mt-10">
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                     {% if request.user.is_authenticated %}
+            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
               <div class="form-group">
-                <label><strong>Cuanto quieres donar?</strong></label>
+                <label><strong>¿Cuanto quieres donar?</strong></label>
                 <div class="input-group">
                   <span class="input-group-addon">$</span>
                   <input type="text" value="100" placeholder="Enter Amount" id="amount" name="amount" class="form-control" required="">
                 </div>
               </div>
-              <input type="hidden" name="cmd" value="_donations">
-              <input type="hidden" name="business" value="ravp92@gmail.com">
-              <input type="hidden" name="item_name" value={{proyecto.titulo}}>
-              <input type="hidden" name="no_shipping" value="1">
-              <input type="hidden" name="cn" value="Comments...">
-              <input type="hidden" name="currency_code" value="USD">
-              <input type="hidden" name="tax" value="0">
-              <input type="hidden" name="lc" value="US">
-              <input type="hidden" name="bn" value="PP-DonationsBF">
-              <input type="hidden" name="return" value="http://www.yoursite.com/thankyou.html">
-              <input type="hidden" name="cancel_return" value="http://www.yoursite.com/paymentcancel.html">
-              <input type="hidden" name="notify_url" value="http://www.yoursite.com/notifypayment.php">
-              <button type="submit" class="btn btn-dark btn-theme-colored btn-flat btn-sm pull-left  data-loading-text="Please wait...">Donate Now</button>
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="business" value="ravp92-facilitator@gmail.com">
+            <input type="hidden" name="item_name" value="{{proyecto.titulo}}">
+            <input type="hidden" name="hosted_button_id" value="3NZKRFNCYEQSC">
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="hidden" name="return" value="http://127.0.0.1:8000/">
+            <input type="hidden" name="cancel_return" value="http://127.0.0.1:8000/">
+            <input type="hidden" name="notify_url" value="http://www.yoursite.com/notifypayment.php">
+            <button type="submit" class="btn btn-dark btn-theme-colored btn-flat btn-sm pull-left  data-loading-text="Please wait...">Donar</button>
             </form>
 
                         <div class="pull-right mt-15"><i class="fa fa-heart-o text-theme-colored"></i> 89 Donors</div>
                     </div>
                 </div>
             </div>
+{% endif %}
 
 
-
-            {% endfor %} {% else %} {% if request.user.is_authenticated and user.profile.tipo_usuario == "ESTUDIANTE" and user == proyecto.usuario %}
+            {% endfor %} {% else %} {% if request.user.is_authenticated and user.profile.tipo_usuario == "ESTUDIANTE" %}
             <div class="col-sm-12">
                 <br>
                 <a href="{% url 'proyecto:proyecto_crear' %}">
@@ -130,6 +127,8 @@
         <a href="?page={{ page_obj.next_page_number }}">Siguiente</a> {% endif %}
     </li>
 </ul>
+                      
+
 
 <!-- Separador -->
 <div class="separator right">

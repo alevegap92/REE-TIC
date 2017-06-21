@@ -23,12 +23,16 @@ class Proyecto(models.Model):
     def __str__(self): #Python 3
         return self.titulo
 
+#VOTOS!        
+import secretballot      
+secretballot.enable_voting_on(Proyecto)
+
 class Picture(models.Model):
     picture = models.ImageField(upload_to='proyecto_pictures', blank=True)
-    proyecto_picture = models.ForeignKey(Proyecto)
+    proyecto_picture = models.ForeignKey(Proyecto, related_name='images')
 
-    def __unicode__(self):
-        return unicode(self.id)
+    def __unicode__(self,):
+        return str(self.image)
 
 class Comment(models.Model):
     user_comment = models.ForeignKey(User)
@@ -37,3 +41,27 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
+from paypal.standard.models import ST_PP_COMPLETED
+from paypal.standard.ipn.signals import valid_ipn_received
+
+def show_me_the_money(sender, **kwargs):
+    ipn_obj = sender
+    if ipn_obj.payment_status == ST_PP_COMPLETED:
+        # WARNING !
+        # Check that the receiver email is the same we previously
+        # set on the business field request. (The user could tamper
+        # with those fields on payment form before send it to PayPal)
+        if ipn_obj.receiver_email != "ravp92-facilitator@gmail.com":
+            # Not a valid payment
+            return
+
+        # ALSO: for the same reason, you need to check the amount
+        # received etc. are all what you expect.
+
+        # Undertake some action depending upon `ipn_obj`.
+        if ipn_obj.custom == "Upgrade all users!":
+            Users.objects.update(paid=True)
+valid_ipn_received.connect(show_me_the_money)
+
+

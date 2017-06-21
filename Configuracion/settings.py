@@ -40,12 +40,16 @@ INSTALLED_APPS = [
     #contrib
     'django.contrib.sites',
     #apps terceros
-    'crispy_forms',
-    'registration',
-    'embed_video',
+    'crispy_forms',#Formularios "bonitos"
+    'registration',#Autenticacion de usuarios
+    'embed_video',#Añadir cualquier tipo de video
+    'secretballot',#Votaciones
+    'likes',#Likes de FB y Google+
+    'paypal.standard.ipn',
+    'widget_tweaks',
     #mis apps
-    'proyecto',
-    'cuenta',
+    'proyecto',#Todo lo que contiene un proyecto
+    'cuenta',#Donde se encuentan los usuarios
 ]
 
 MIDDLEWARE = [
@@ -56,6 +60,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #Votaciones
+    #'secretballot.middleware.SecretBallotIpUseragentMiddleware',
+    #Likes
+    #'likes.middleware.SecretBallotUserIpUseragentMiddleware',
 ]
 
 ROOT_URLCONF = 'configuracion.urls'
@@ -72,6 +80,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                #likes
+                #'django.core.context_processors.request',
             ],
         },
     },
@@ -162,3 +172,7 @@ LOGIN_REDIRECT_URL = '/'
 #-----------FORMULARIOS----------------#
 #No se ha ocupado
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+#-----------PayPal----------------#
+PAYPAL_TEST = True
+PAYPAL_RECEIVER_EMAIL = "ravp92@gmail.com"
