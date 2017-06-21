@@ -8,6 +8,8 @@ Luego de clonar repositorio se debe instalar en el entorno virtual:
 * pip install django-embed-video==1.1.2
 * pip install django-widget-tweaks
 * pip install django-paypal==0.3.6
+
 Experimentando los votos pero no son funcionales todavia
+
 * pip install django-secretballot==0.7.0
 * pip install django-likes==1.11
