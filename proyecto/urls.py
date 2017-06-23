@@ -6,6 +6,7 @@ from .views import proyectoList, proyectoUpdate, proyectoDelete, proyectoDetail,
 
 urlpatterns = [
     #url(r'^nuevo$', login_required(proyectoCreate.as_view()), name='proyecto_crear'),
+    url(r'^nuevo/$', login_required(views.publish), name='proyecto_crear'),
     url(r'^$', proyectoList.as_view(), name='proyecto_listar'),
     url(r'^todos$', proyectoList2.as_view(), name='proyecto_listar0'),
     url(r'^(?P<pk>\d+)$', proyectoDetail.as_view(), name='proyecto_detalle'),
