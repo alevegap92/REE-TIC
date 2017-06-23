@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     #mis apps
     'proyecto',#Todo lo que contiene un proyecto
     'cuenta',#Donde se encuentan los usuarios
+    'pagos',
 ]
 
 MIDDLEWARE = [
@@ -175,4 +176,22 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 #-----------PayPal----------------#
 PAYPAL_TEST = True
-PAYPAL_RECEIVER_EMAIL = "ravp92@gmail.com"
+PAYPAL_RECEIVER_EMAIL = "ravp92-facilitator@gmail.com"
+PAYPAL_MODE= 'sandbox'
+PAYPAL_CLIENT_ID  = 'AVAchGLEXuF6VKhhDqbx1sY9q_34eUZrgaFiVGcxApzIh5WRIyoUi2lEvZhNiYg8-WxHjJZXu6GdzcyQ'
+PAYPAL_CLIENT_SECRET = 'EOm-ghjTraylLU2e5GyWhG7-xOhssqn_4v8-qaC5vXSEAvlnXeoRXI3ELE7FXH_c7gxAine2KcDy9jvR'
+#-----------PayPal----------------#
+#-----------Sitio ngrok----------------#
+SITE_URL = 'http://311ade33.ngrok.io'
+#-----------Sitio ngrok----------------#
+#-----------Configurara Mail---------#
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL  = 'ravp92@gmail.com'
+SERVER_EMAIL        = 'ravp92@gmail.com'
+EMAIL_USE_TLS       = True
+EMAIL_HOST          = 'smtp.gmail.com'
+EMAIL_PORT          = 587
+
+#EMAIL_HOST_USER     = 'usuario@direccionemail.com'
+#EMAIL_HOST_PASSWORD = 'claveservidor'
+#-----------Configurara Mail---------#

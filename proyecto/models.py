@@ -16,16 +16,14 @@ class Proyecto(models.Model):
     video = EmbedVideoField(blank=True)
     creacion = models.DateTimeField(auto_now_add=True)
     actualizacion = models.DateTimeField(auto_now=True)
-    donate = models.IntegerField(blank=True)
+    donate = models.PositiveIntegerField(blank=True)
+    #num_likes= models.PositiveIntegerField(default=0)
 
     def __unicode__(self):
         return unicode(self.usuario)
     def __str__(self): #Python 3
         return self.titulo
-
-#VOTOS!        
-import secretballot      
-secretballot.enable_voting_on(Proyecto)
+       
 
 class Picture(models.Model):
     picture = models.ImageField(upload_to='proyecto_pictures', blank=True)
@@ -41,6 +39,7 @@ class Comment(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
 
 from paypal.standard.models import ST_PP_COMPLETED
 from paypal.standard.ipn.signals import valid_ipn_received

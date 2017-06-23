@@ -255,6 +255,7 @@ https://www.paypal.com/cgi-bin/webscr
 <center>
 <a class="hvr-icon-back pl-40" href="{% url 'proyecto:proyecto_listar' %}">Volver</a>
 </center>
+        <a href="{% url 'pago-paypal' proyecto.pk %}" class="btn btn-info btn-lg pull-right">Comprar {{proyecto.donate}}€</a>
 <!--
 
 

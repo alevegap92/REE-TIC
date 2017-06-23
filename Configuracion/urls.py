@@ -30,9 +30,9 @@ urlpatterns = [
         name='registration_register'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^', include('proyecto.urls', namespace='proyecto')),
-
-    url(r'^likes/', include('likes.urls')),
+    #url(r'^notify/', include('paypal.standard.ipn.urls')),
     url(r'^accounts/', include('cuenta.urls', namespace='cuenta')),
+    url(r'^', include('pagos.urls')),
     #url(r'^accounts/register/$', RegistrationView.as_view(form_class = ProfileForm), name='registration_register'),
 ]
 

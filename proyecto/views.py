@@ -9,7 +9,14 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
-#CLASES DE PROYECTO
+#Para sumar
+from django.db.models import Sum
+#---------------CLASES Y FUNCIONES DE MODELO PROYECTO 100%----------------------#
+from pagos.models import PagoPaypal
+from cuenta.models import Profile
+
+
+
 
 class proyectoDetail(DetailView):
 	model = Proyecto
@@ -59,8 +66,6 @@ def publish(request):
 
 
 class proyectoUpdate(UpdateView):
-
-
 	model = Proyecto
     #post = post_form.save(commit=False)
    # if 'logo' in request.FILES:
@@ -75,7 +80,29 @@ class proyectoDelete(DeleteView):
 	template_name = 'proyecto/proyecto_delete.html'
 	success_url = reverse_lazy('proyecto:proyecto_listar')
 
-#Funcion para subir imagenes
+
+
+#------------FIN CLASES Y FUNCIONES DE MODELO PROYECTO 100%----------------------#  
+
+#Funcion para dar likes(votos) a los proyectos
+def like_post(request, proyecto_id):
+
+    id_proyecto = None
+    if request.method == 'GET':
+        id_proyecto = request.GET['proyecto_id']
+
+    likes = 0
+    if id_proyecto:
+        post = Post.objects.get(id=int(id_proyecto))
+        if post:
+            likes = post.num_likes + 1
+            post.num_likes = likes
+            post.save()
+
+    return HttpResponse(likes)
+
+
+#Funcion para subir varias imagenes imagenes 
 def upload_image_view(request):
     if request.method == 'POST':
         picture_form = PictureForm(data=request.POST)
@@ -86,32 +113,9 @@ def upload_image_view(request):
             picture.proyecto_picture = post
             picture.save()
             message = "Se ha creado el proyecto corretamente!"
-            return HttpResponseRedirect('proyecto/upload_imagen.html')
+            return HttpResponseRedirect('/')
     else:
         picture_form = PictureForm()
 
     return render_to_response('proyecto/upload_imagen.html', locals(), context_instance=RequestContext(request))
 
-#PayPal
-from django.core.urlresolvers import reverse
-from django.shortcuts import render
-from paypal.standard.forms import PayPalPaymentsForm
-
-def view_that_asks_for_money(request):
-
-    # What you want the button to do.
-    paypal_dict = {
-        "business": "ravp92-facilitator@gmail.com",
-        "amount": "10",
-        "item_name": "name of the item",
-        "invoice": "unique-invoice-id",
-        "notify_url": "http://127.0.0.1:8000/" + reverse('paypal-ipn'),
-        "return_url": "https://www.example.com/your-return-location/",
-        "cancel_return": "https://www.example.com/your-cancel-location/",
-        "custom": "Upgrade all users!",  # Custom command to correlate to some function later (optional)
-    }
-
-    # Create the instance.
-    form = PayPalPaymentsForm(initial=paypal_dict)
-    context = {"form": form}
-    return render(request, "payment.html", context)
