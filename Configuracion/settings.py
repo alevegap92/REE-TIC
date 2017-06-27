@@ -43,9 +43,6 @@ INSTALLED_APPS = [
     'crispy_forms',#Formularios "bonitos"
     'registration',#Autenticacion de usuarios
     'embed_video',#Añadir cualquier tipo de video
-    'secretballot',#Votaciones
-    'likes',#Likes de FB y Google+
-    'paypal.standard.ipn',
     'widget_tweaks',
     #mis apps
     'proyecto',#Todo lo que contiene un proyecto

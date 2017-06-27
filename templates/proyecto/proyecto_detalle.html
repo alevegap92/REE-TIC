@@ -103,20 +103,10 @@ https://www.paypal.com/cgi-bin/webscr
                                     </ul>
                                     <div class="mt-10">
                                         <ul class="pull-left list-inline mt-20">
-                                            <li class="text-theme-colored pr-0">Monto a recaudar ${{proyecto.donate}} US</li>
+                                            <li class="text-theme-colored pr-0">Monto a recaudar ${{proyecto.donate}} EUR</li>
                                         </ul>
-        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-            <input type="hidden" name="cmd" value="_xclick">
-            <input type="hidden" name="business" value="ravp92-facilitator@gmail.com">
-            <input type="hidden" name="item_name" value="{{proyecto.titulo}}">
-            <input type="hidden" name="hosted_button_id" value="3NZKRFNCYEQSC">
-            <input type="hidden" name="currency_code" value="USD">
-            <input type="hidden" name="return" value="http://127.0.0.1:8000/">
-            <input type="hidden" name="cancel_return" value="http://127.0.0.1:8000/">
-            <button type="submit" class="btn btn-dark btn-flat btn-sm pull-right mt-15"
-                   alt="Make payments with PayPal - it's fast, free and secure!">Donar</button>
-        </form>
-                                    </div>
+ <a href="{% url 'pago-paypal' proyecto.pk %}" class="btn btn-info btn-lg pull-right">Donar</a>
+                           </div>
                                 </div>
                             </div>
                         </div>
@@ -255,7 +245,7 @@ https://www.paypal.com/cgi-bin/webscr
 <center>
 <a class="hvr-icon-back pl-40" href="{% url 'proyecto:proyecto_listar' %}">Volver</a>
 </center>
-        <a href="{% url 'pago-paypal' proyecto.pk %}" class="btn btn-info btn-lg pull-right">Comprar {{proyecto.donate}}€</a>
+
 <!--
 
 

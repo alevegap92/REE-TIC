@@ -1,14 +1,15 @@
 {% extends 'base.html' %} {% block content %}
 <!-- Section: home -->
-<section id="home" class="divider parallax" data-stellar-background-ratio="0.5" data-bg-img="http://www.robotixmallorca.com/images/proyecto/Robotix-6.JPG">
+
+<section id="home" class="divider parallax" data-stellar-background-ratio="0.5" data-bg-img="http://www.vectoracademy.digital/img/4.jpg">
     <div class="display-table">
         <div class="display-table-cell">
             <div class="container pt-200 pb-200">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div class="bg-lightest-transparent text-center pt-60 pb-60">
-                            <h1 class="text-white text-uppercase font-60">RED <span class="text-theme-colored">Emprendimiento Escolar</span></h1>
-                            <h4 class="text-white font-weight-400">Every day we bring hope to millions of children in the world's <br>hardest places as a sign of God's unconditional love.</h4>
+                            <h1 class="text-black text-uppercase font-60">RED <span class="text-theme-colored">Emprendimiento Escolar</span></h1>
+                            <h4 class="text-black font-weight-400">REE es un proyecto que nace con la intención de orientar a los jóvenes escolares emprendedores con las distintas vías de financiamiento que existen en el país, con el fin de motivar sus ideas y proyectos otorgándoles una plataforma donde puedan ser reconocidos por adultos o instituciones que deseen apoyarlos financieramente.</h4>
 <!--                            {% if request.user.is_authenticated %}
                             <a href="{% url 'proyecto:proyecto_crear' %}">
 
@@ -41,20 +42,42 @@
                     <div class="title-icon">
                         <i class="flaticon-charity-hand-holding-a-heart"></i>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
+                    <p></p>
                 </div>
             </div>
         </div>
         <div class="row">
             {% if object_list %} {% for proyecto in object_list %}
-            <div class="col-sm-10 col-lg-3">
+             <div class="col-sm-10 col-lg-3">
 
                 <div class="causes bg-lighter box-hover-effect effect1 maxwidth500 mb-sm-30">
 
                     <div class="thumbnail">
                         {% if proyecto.logo %}
+                            <div class="gallery-item">
+                <article class="post clearfix maxwidth600 mb-30">
+                        <div class="entry-header">
+                    <div class="post-thumb thumb">
                         <a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}">
-                            <img class="img-fullwidth" idth="265" height="195" alt="" src="{{ proyecto.logo.url }}" w class='img-responsive' /> {% else %}
+                            <img class="img-fullwidth" idth="265" height="195" alt="" src="{{ proyecto.logo.url }}" w class='img-responsive' href="{% url 'proyecto:proyecto_detalle' proyecto.id %}"/> 
+                            <div class="entry-meta meta-absolute text-center pl-15 pr-15">
+                      <div class="display-table">
+                        <div class="display-table-cell">
+                          <ul>
+                                                  {% for voto in proyecto.choice_set.all %}
+
+ 
+
+                            <li><a class="text-white" href="/vota/{{ proyecto.id}}"><i class="fa fa-thumbs-o-up"></i> {{ voto.votes }}<br> Likes</a></li>
+                            {%  endfor %}
+                          </ul>
+                        </div>
+                      </div>
+                        </div>
+                      </div>
+                      </div>
+                       </article>
+                    </div>{% else %}
                             <img class="img-fullwidth" alt="" href="{% url 'proyecto:proyecto_detalle' proyecto.id %}" src="http://placehold.it/265x195"> {% endif %}
                     </div>
                     <div class="progress-item mt-0">
@@ -74,35 +97,18 @@
                         
                             <li class="pull-left pr-0">{{total}}</li>
  
-                            <li class="text-theme-colored pull-right pr-0">Monto: {{proyecto.donate}}</li>
+                            <li class="text-theme-colored pull-right pr-0">Monto a recaudar: {{proyecto.donate}}</li>
                         </ul>
+
                     </div>
                     <div class="mt-10">
-                     {% if request.user.is_authenticated %}
-            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-              <div class="form-group">
-                <label><strong>¿Cuanto quieres donar?</strong></label>
-                <div class="input-group">
-                  <span class="input-group-addon">$</span>
-                  <input type="text" value="100" placeholder="Enter Amount" id="amount" name="amount" class="form-control" required="">
-                </div>
-              </div>
-            <input type="hidden" name="cmd" value="_xclick">
-            <input type="hidden" name="business" value="ravp92-facilitator@gmail.com">
-            <input type="hidden" name="item_name" value="{{proyecto.titulo}}">
-            <input type="hidden" name="hosted_button_id" value="3NZKRFNCYEQSC">
-            <input type="hidden" name="currency_code" value="USD">
-            <input type="hidden" name="return" value="http://127.0.0.1:8000/">
-            <input type="hidden" name="cancel_return" value="http://127.0.0.1:8000/">
-            <input type="hidden" name="notify_url" value="http://www.yoursite.com/notifypayment.php">
-            <button type="submit" class="btn btn-dark btn-theme-colored btn-flat btn-sm pull-left  data-loading-text="Please wait...">Donar</button>
-            </form>
+                     
 
                         <div class="pull-right mt-15"><i class="fa fa-heart-o text-theme-colored"></i> 89 Donors</div>
                     </div>
                 </div>
             </div>
-{% endif %}
+
 
 
             {% endfor %} {% else %} {% if request.user.is_authenticated and user.profile.tipo_usuario == "ESTUDIANTE" %}
@@ -129,9 +135,29 @@
         <a href="?page={{ page_obj.next_page_number }}">Siguiente</a> {% endif %}
     </li>
 </ul>
-                      
 
 
+<!-- Section:FINANCIAMIENTO -->
+<section id="f">
+ <div class="separator right">
+    <i class="fa fa-graduation-cap"></i>
+</div>      
+
+        <div class="section-title text-center">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h3 class="text-uppercase mt-0" href="{% url 'proyecto:proyecto_listar0' %}">Metodos de financiamiento</h3>
+                    <div class="title-icon">
+                        <i class="flaticon-charity-hand-holding-a-heart"></i>
+                    </div>
+                    <p> El siguiente listado tiene como finalidad informar a los estudiantes sobre vías de financiamiento disponibles en el país para estudiantes de enseñanza básica y media, con el propósito de fomentar a los estudiantes a participar en éstas</p>
+                </div>
+            </div>
+        </div>       
+        </section> 
+{% include "info.html" %}
+
+<!-- Section:FINANCIAMIENTO -->
 <!-- Separador -->
 <div class="separator right">
     <i class="fa fa-graduation-cap"></i>
