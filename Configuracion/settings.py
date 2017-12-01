@@ -150,8 +150,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #-----------USUARIO AUTENTICADO----------------#
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ravp92@gmail.com'
-EMAIL_HOST_PASSWORD = '59897565323156rico'
+EMAIL_HOST_USER = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 '''
@@ -183,8 +183,8 @@ SITE_URL = 'http://311ade33.ngrok.io'
 #-----------Sitio ngrok----------------#
 #-----------Configurara Mail---------#
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL  = 'ravp92@gmail.com'
-SERVER_EMAIL        = 'ravp92@gmail.com'
+DEFAULT_FROM_EMAIL  = 'smtp.gmail.com'
+SERVER_EMAIL        = 'smtp.gmail.com'
 EMAIL_USE_TLS       = True
 EMAIL_HOST          = 'smtp.gmail.com'
 EMAIL_PORT          = 587
