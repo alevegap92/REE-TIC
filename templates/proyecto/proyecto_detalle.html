@@ -9,7 +9,8 @@
   js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=407331482999595";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<!-- Facebook end-plugins -->
+<!-- Facebook end-plugins{{ value|add:"2" }}{{ value|add:"2" }}{{ value|add:"2" }}{{ value|add:"2" }} -->
+
 <!-- Facebook plugins 
 <div id="fb-root"></div>
 <script>
@@ -103,8 +104,10 @@ https://www.paypal.com/cgi-bin/webscr
                                     </ul>
                                     <div class="mt-10">
                                         <ul class="pull-left list-inline mt-20">
-                                            <li class="text-theme-colored pr-0">Monto a recaudar ${{proyecto.donate}} EUR</li>
+                                            <li class="text-theme-colored pr-0">Monto a recaudar ${{proyecto.donate}} USD</li>
                                         </ul>
+                                        <!--{% csrf_token %}
+                                        {{ post_form.descripcion_general}}-->
  <a href="{% url 'pago-paypal' proyecto.pk %}" class="btn btn-info btn-lg pull-right">Donar</a>
                            </div>
                                 </div>

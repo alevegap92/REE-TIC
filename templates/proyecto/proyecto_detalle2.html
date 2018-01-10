@@ -1,0 +1,290 @@
+{% extends 'base.html' %} {% block title %}{{ context.titulo }}{% endblock %} {% block content %}
+<!-- Section: inner-header -->
+<!-- Facebook plugins -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=407331482999595";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- Facebook end-plugins{{ value|add:"2" }}{{ value|add:"2" }}{{ value|add:"2" }}{{ value|add:"2" }} -->
+
+<!-- Facebook plugins 
+<div id="fb-root"></div>
+<script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=409125935834772";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+Facebook end-plugins -->
+<section class="inner-header divider layer-overlay overlay-dark" data-bg-img="http://www.robotixmallorca.com/images/proyecto/Robotix-6.JPG">
+    <div class="container pt-30 pb-30">
+        <!-- Section Content -->
+        <div class="section-content text-center">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <h2 class="text-theme-colored font-36">{{ context.titulo }}</h2>
+                    <ol class="breadcrumb text-center mt-10 white">
+
+                        {% if request.user.is_authenticated and user.profile.tipo_usuario == "ESTUDIANTE" and user == context.usuario %}
+                        <a class="btn btn-default btn-sm" href="{% url 'proyecto:proyecto_editar' proyecto.id %}"><span class="glyphicon glyphicon-wrench"></span></a>
+                        <a class="btn btn-default btn-sm" href="{% url 'proyecto:upload_image_view' proyecto.id %}"><span class="glyphicon glyphicon-camera"></span></a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'proyecto:proyecto_eliminar' proyecto.id %}"><span class="glyphicon glyphicon-trash"></span></a>
+                        {% endif %}
+                        <li><a href="/">Incio</a></li>
+                        <li><a href="/todos">Proyectos</a></li>
+                        <li>Creado: <span class="text-theme-colored">{{context.creacion}}</span></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <!--Contenido real-->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-11">
+                    <div class="upcoming-events media bg-light p-15 pb-60 mb-50 mb-sm-30">
+                        <div class="thumb">
+                            {% if object.video %} {% load embed_video_tags %} {% video context.video as my_video %} {% video my_video '810x410' %} {% endvideo %} {% endif %}
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="mt-30">
+                                    <h4 class="media-heading text-uppercase font-weight-500">{{ context.titulo }}</h4>
+                                    <!--
+Imagen saltarina
+<img class="wow rubberBand" data-wow-duration="1.5s" data-wow-offset="10" src="http://placehold.it/520x259" alt="">   -->
+                                    {% if context.logo %}
+                                    <a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}">
+                                        <img class="wow rubberBand" data-wow-duration="1.5s" data-wow-offset="10" src="{{ proyecto.logo.url }}" width="100" height="100" class="img-responsive" alt="">
+                                    {% else %}
+                                        <p>Sin imagen</p>
+                                    {% endif %}
+                                    <div class="entry-meta">
+                                        <ul class="list-inline">
+
+<li>Actualizado: <span class="text-theme-colored">{{context.actualizacion}}</span></li>
+                                            <li>By: <span class="text-theme-colored">{{ proyecto.usuario }}</span></li>
+                                        </ul>
+                                    </div>
+                                    <p class="mb-20">{{context.descripcion_general}}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="event-count causes clearfix p-15 mt-15 border-left">
+                                    <div class="progress-item mt-20 mb-30">
+                                        <div class="progress mb-30">
+                                            <div class="progress-bar" data-percent="85"></div>
+                                        </div>
+                                    </div>
+<!-- https://www.sandbox.paypal.com/cgi-bin/webscr 
+https://www.paypal.com/cgi-bin/webscr 
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="3NZKRFNCYEQSC">
+<input type="image" src="https://www.paypalobjects.com/es_XC/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+</form>-->
+
+
+
+                                    <ul class="list-inline clearfix">
+                                        <li class="pull-left pr-0">Raised: $1890</li>
+                                        <li class="pull-right pr-0"><i class="fa fa-heart-o text-theme-colored"></i> 89 Donors</li>
+                                    </ul>
+                                    <div class="mt-10">
+                                        <ul class="pull-left list-inline mt-20">
+                                            <li class="text-theme-colored pr-0">Monto a recaudar ${{proyecto.donate}} USD</li>
+                                        </ul>
+                           </div>
+                                </div>
+                            </div>
+                        </div>
+<!--Descripciones-->
+<section class="position-inherit">
+     <div class="container">
+       <div class="row">
+    <!--     <div class="col-md-3 scrolltofixed-container">
+           <div class="list-group scrolltofixed">
+             <a href="#section-one" class="list-group-item smooth-scroll-to-target">Descripcion</a>
+
+             <a href="#section-two" class="list-group-item smooth-scroll-to-target">Problema</a>
+
+             <a href="#section-three" class="list-group-item smooth-scroll-to-target">Solucion</a>
+
+           </div>
+         </div>-->
+         <div class="col-md-9">
+           <div id="section-one" class="mb-50">
+             <h2>Visión general del negocio</h2>
+             <hr>
+             <p class="mb-20">{{context.descripcion_detallada}}</p>
+           </div>
+           <div id="section-two" class="mb-50">
+             <h2>Definicion del problema</h2>
+             <hr>
+             <p class="mb-20">{{context.definicion_problema}}</p>
+           </div>
+           <div id="section-three" class="mb-50">
+             <h2>Solucion propuesta</h2>
+             <hr>
+             <p class="mb-20">{{context.definicion_solucion}}</p>
+           </div>
+
+         </div>
+       </div>
+     </div>
+   </section>
+
+ </div>
+ <!-- end main-content -->
+<!--
+                        <div class="event-details">
+                            <p class="mb-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat qui ducimus illum modi? Libero saepe perspiciatis accusamus soluta perferendis, ad illum, nesciunt, reiciendis iusto et cupiditate. Repudiandae provident, consectetur,
+                                sapiente, libero iure necessitatibus corporis nulla voluptate, quisquam aut eum perspiciatis? Fugiat labore aspernatur eius, perspiciatis ut molestiae, delectus rem.</p>
+                            <div class="pull-left mr-15">
+                                <img src="http://placehold.it/276x180" alt="">
+                            </div>
+                            <div class="">
+                                <p class="font-14 text-black-light"><em>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam nequep aliquid suscipit voluptas ab temporibus, animi impedit ipsum, sunt rem sed ut quod quas earum inventore expedita consectetur.</em></p>
+                                <p class="mt-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat qui ducimus illum modi? Libero saepe perspic reiciendis iusto et cupiditate. Repudiandae provident, consectetur, sapiente, libero iure necessitatibus corporis
+                                    nulla sit voluptate, quisquam aut eum perspiciatis? Fugiat labore aspernatur </p>
+                            </div>
+                            <p class="mt-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat qui ducimus illum modi? Libero saepe perspiciatis accusamus soluta perferendis, ad illum, nesciunt, reiciendis iusto et cupiditate. Repudiandae provident, consectetur,
+                                sapiente, libero iure necessitatibus corporis nulla voluptate, quisquam aut eum perspiciatis? Fugiat labore aspernatur eius, perspiciatis ut molestiae, delectus rem tempora omnis optio odio autem asperiores quae maiores
+                                ea eveniet cupiditate aut repellendus? Quo iure explicabo quam reprehenderit ipsam sequi. Perferendis esse iure ullam, illum, quibusdam corporis nobis dolores unde dolorem ipsa quaerat suscipit.</p>
+                        </div>
+                    </div>-->
+ <!-- divider: Gallery -->
+    <section class="divider bg-lighter">
+      <div class="container-fluid">
+        <div class="section-title text-center">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+              <h3 class="text-uppercase mt-0">Gallery</h3>
+              <div class="title-icon">
+                <i class="flaticon-charity-hand-holding-a-heart"></i>
+              </div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
+            </div>
+          </div>
+        </div>
+        <div class="section-content">
+          <div class="row">
+          {% if object_list %} {% for pictures in object_list %}
+            <div class="col-md-5">
+              <div class="gallery-isotope grid-5 gutter-small clearfix" data-lightbox="gallery">
+                <!-- Portfolio Item Start -->
+                <div class="gallery-item">
+                  <div class="thumbnail">
+                  {% if object.picture %}
+                  <img class="img-fullwidth" idth="265" height="195" alt="" src="{{ picture.picture.url }}" class='img-responsive' />
+                  {% else %}
+                    <img alt="project" src="http://placehold.it/310x215" class="img-fullwidth"> {% endif %}
+                    <div class="overlay-shade"></div>
+                    <div class="icons-holder">
+                      <div class="icons-holder-inner">
+                        <div class="styled-icons icon-dark icon-circled icon-theme-colored">
+                          <a href="images/gallery/gallery-lg1.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Portfolio Item End -->
+                
+                 {% endfor %} {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+            <div class="mt-30 mb-0">
+                <h5 class="pull-left mt-10 mr-20 text-theme-colored">Comparte:</h5>
+                <ul class="styled-icons icon-circled m-0">
+                    <li><a href="https://www.facebook.com/sharer/sharer.php?u={ request.build_absolute_uri }}" data-bg-color="#3A5795"><i class="fa fa-facebook text-white"></i></a></li>
+                    <li><a href="https://twitter.com/home?status={{ object.titulo}} {{ request.build_absolute_uri }}" data-bg-color="#55ACEE"><i class="fa fa-twitter text-white"></i></a></li>
+                    <li><a href="#" data-bg-color="#A11312"><i class="fa fa-google-plus text-white"></i></a></li>
+                </ul>
+            </div>
+            <!-- Facebook Comments plugin -->
+
+
+            <h3 id="comments-title"><span><fb:comments-count href="http://kodesolution.com/demo/corporate/CharityFund/html/v1.2/blog-single-facebook-comments.html"></fb:comments-count></span> Comments</h3>
+
+            <div class="fb-comments" data-width="100%" data-href="" data-numposts="5" data-colorscheme="light"></div>
+            <!-- Facebook Comments end -->
+        </div>
+        </div>
+    </section>
+    </div>
+    <hr>
+
+    <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-show-faces="true"  data-layout="box_count" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+
+    
+<!--
+    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>-->  
+    <br><br>
+
+   
+<center>
+<a class="hvr-icon-back pl-40" href="{% url 'proyecto:proyecto_listar' %}">Volver</a>
+</center>
+
+<!--
+
+
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="3NZKRFNCYEQSC">
+<input type="image" src="https://www.paypalobjects.com/es_XC/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-push-3">
+            <h4 class="mt-0 pt-5"> Make One-Time Donation with Paypal</h4>
+            <p>Thank you for making a donation to our charitable organization. Please use the form below to pay your desired giving amount.</p>
+            <hr>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+              <div class="form-group">
+                <label><strong>How much do you want to donate?</strong></label>
+                <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                  <input type="text" value="100" placeholder="Enter Amount" id="amount" name="amount" class="form-control" required="">
+                </div>
+              </div>
+              <input type="hidden" name="cmd" value="_donations">
+              <input type="hidden" name="business" value="ravp92@gmail.com">
+              <input type="hidden" name="item_name" value={{proyecto.titulo}}>
+              <input type="hidden" name="no_shipping" value="1">
+              <input type="hidden" name="cn" value="Comments...">
+              <input type="hidden" name="currency_code" value="USD">
+              <input type="hidden" name="tax" value="0">
+              <input type="hidden" name="lc" value="US">
+              <input type="hidden" name="bn" value="PP-DonationsBF">
+              <input type="hidden" name="return" value="http://www.yoursite.com/thankyou.html">
+              <input type="hidden" name="cancel_return" value="http://www.yoursite.com/paymentcancel.html">
+              <input type="hidden" name="notify_url" value="http://www.yoursite.com/notifypayment.php">
+              <input type="image" src="https://www.paypalobjects.com/es_XC/i/btn/btn_donateCC_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online!">
+              <img alt="" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>-->
+    {% endblock%}

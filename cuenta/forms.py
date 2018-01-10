@@ -17,7 +17,6 @@ class ProfileForm(RegistrationFormUniqueEmail):
     telefono = forms.CharField(label="Telefono Celular +569")
     colegio = forms.CharField(label="Colegio")
     curso = forms.IntegerField(label="Curso: primero medio es 9, segundo medio es 10, etc")
-    foto = forms.ImageField(label="Foto perfil")
 #- Validad cuando la pagina este full online - #
     #phone_regex = RegexValidator(regex=r'^\+?1?\d{8,15}$', message="El numero ingresado no es del formato: '+999999999' o no esta entre 9 y 15 digitos.")
     #phone = forms.CharField(validators=[phone_regex], label='Telefono')

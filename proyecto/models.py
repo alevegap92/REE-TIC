@@ -34,7 +34,7 @@ class Picture(models.Model):
         return str(self.image)
 
 class Comment(models.Model):
-    user_comment = models.ForeignKey(User)
+    user_comment = models.ForeignKey(User, on_delete=models.CASCADE)
     post_comment = models.ForeignKey(Proyecto, on_delete=models.CASCADE)
     text = models.TextField(max_length=500)
 
@@ -47,4 +47,7 @@ class Choice(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+    def __str__(self): #Python 3
+        return self.proyecto.titulo
+       
 

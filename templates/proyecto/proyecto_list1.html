@@ -41,13 +41,13 @@
                     <div class="title-icon">
                         <i class="flaticon-charity-hand-holding-a-heart"></i>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem autem<br> voluptatem obcaecati!</p>
+                    <p>Proyectos más votados</p>
+
                 </div>
             </div>
         </div>
         <div class="row">
         
-        {{ total }}
      
             {% for proyecto in proyectos %}
 
@@ -56,16 +56,23 @@
                 <div class="causes bg-lighter box-hover-effect effect1 maxwidth500 mb-sm-30">
 
                     <div class="thumbnail">
-                    
+
                         {% if proyecto.logo %}
                             <div class="gallery-item">
                 <article class="post clearfix maxwidth600 mb-30">
                         <div class="entry-header">
-                    <div class="post-thumb thumb">
+                    <div class="post-thumb thumb"><!-- Diseño de cuadrado sobre puesto imagen-->
 
                         <a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}">
-                            <img class="img-fullwidth" idth="265" height="195" alt="" src="{{ proyecto.logo.url }}" w class='img-responsive' /> 
+                            <img class="img-fullwidth" idth="265" height="195" alt="" src="{{ proyecto.logo.url }}" class='img-responsive' /> 
                             <div class="entry-meta meta-absolute text-center pl-15 pr-15">
+                    {%if proyecto.video %}        
+                    {% load embed_video_tags %} 
+                    {% video proyecto.video as my_video %} 
+                            <a class="btn btn-default btn-transparent btn-flat btn-sm  popup-youtube" href="{{ my_video.url }}"><span class="glyphicon glyphicon-expand"></span></a>  
+                    {% endvideo %} 
+                    {% endif %}
+
                       <div class="display-table">
                         <div class="display-table-cell">
                           <ul>
@@ -86,7 +93,17 @@
                     </div>
                     <div class="progress-item mt-0">
                         <div class="progress mb-0">
-                            <div class="progress-bar" data-percent="84"></div>
+                        {% for total in totales %}
+
+                        {% if total.Proyecto__titulo == proyecto.titulo %}
+                         <div class="progress-bar" data-percent="{% widthratio total.donate__sum proyecto.donate 100 %}"></div>
+                                
+                        {% endif %}
+
+                        {%  endfor %}
+                           
+
+
                         </div>
                     </div>
                     {% if request.user.is_authenticated and user.profile.tipo_usuario == "ESTUDIANTE" and user == proyecto.usuario %}
@@ -94,24 +111,37 @@
                     <a class="btn btn-default btn-sm" href="{% url 'proyecto:proyecto_editar' proyecto.id %}"><span class="glyphicon glyphicon-wrench"></span></a>
                     <a class="btn btn-danger btn-sm" href="{% url 'proyecto:proyecto_eliminar' proyecto.id %}"><span class="glyphicon glyphicon-trash"></span></a> {% endif %}
                     <div class="causes-details clearfix border-bottom p-15 pt-10">
-                        <h5><a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}"><p>{{ proyecto.titulo }}</a></p></h5>
+                        <h5><a class="hvr-float-shadow" href="{% url 'proyecto:proyecto_detalle' proyecto.id %}"><p>{{ proyecto.titulo }}</a></p></h5>
                         <p>{{ proyecto.descripcion_general }}</p>
 
                         <ul class="list-inline clearfix mt-20">
-                        
-                            <li class="pull-left pr-0">{{total}}</li>
- 
-                            <li class="text-theme-colored pull-right pr-0">Monto: {{proyecto.donate}}</li>
+                        {% for total in totales %}
+
+                        {% if total.Proyecto__titulo == proyecto.titulo %}
+                               <li class="pull-left pr-0">Recaudado: {{total.donate__sum}}</li>
+                        {% endif %}
+
+                        {%  endfor %}
+                        <li class="text-theme-colored pull-right pr-0">Monto a recaudar: {{proyecto.donate}}</li>
                         </ul>
-                        
-
- 
-
+                    
                     </div>
                     <div class="mt-10">
                      
 
-                        <div class="pull-right mt-15"><i class="fa fa-heart-o text-theme-colored"></i> 89 Donors</div>
+                        <div class="pull-right mt-15">
+                        <i class="fa fa-heart-o text-theme-colored"></i>
+                        {% for donador in donadores %}
+
+                        {% if donador.Proyecto__titulo == proyecto.titulo %}   
+                         {{donador.num_donadores}} Donadores 
+
+                        {% endif %}
+                        {%  endfor %}
+                        {{porcentajes}}
+                           
+                    
+                        </div>
                     </div>
                 </div>
             </div>

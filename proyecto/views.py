@@ -10,12 +10,24 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 #Para sumar
-from django.db.models import Sum
+from django.db.models import Sum, Count
 #---------------CLASES Y FUNCIONES DE MODELO PROYECTO 100%----------------------#
 from pagos.models import PagoPaypal
 from cuenta.models import Profile
 
+class proyectoDetail2(DetailView):
+    model = Proyecto
+    template_name = 'proyecto/proyecto_detalle2.html'
+    context_object_name = "proyecto_detalle"
 
+    def get_context_data(self, **kwargs):
+        # Llamamos ala implementacion para traer un primer context
+        context = super(proyectoDetail2, self).get_context_data(**kwargs)
+        #Agregamos un QuerySet de todos los Modelos necesarios para mostrar            
+        context['paypal_list'] = PagoPaypal.objects.all()
+        context['totales'] = PagoPaypal.objects.values('Proyecto__titulo').annotate(Sum('donate'))
+        context['donadores'] = PagoPaypal.objects.values('Proyecto__titulo').annotate(num_donadores=Count('Proyecto__titulo'))
+        return context
 
 class proyectoDetail(DetailView):
     model = Proyecto
@@ -31,34 +43,53 @@ class proyectoList2(ListView):
     template_name = 'proyecto/proyecto_list0.html'
     paginate_by = 6
     context_object_name = "proyecto_list"
+    #No se ocupa defget_object
+    def get_object(self):
+        # Llamamos ala superclase
+        object = super(proyectoList2, self).get_object()
+        # Grabamos el ultimo acceso ala base de datos
+        object.donate_min = PagoPaypal.objects.values('Proyecto__titulo').annotate(Sum('donate'))
+        object.save()
+        # Retornamos el objeto
+        return object
+
     def get_context_data(self, **kwargs):
         # Llamamos ala implementacion para traer un primer context
         context = super(proyectoList2, self).get_context_data(**kwargs)
         #Agregamos un QuerySet de todos los Modelos necesarios para mostrar            
         context['paypal_list'] = PagoPaypal.objects.all()
-        context['picture_list'] = Picture.objects.all()
-        context['profile_list'] = Profile.objects.all()
-
-        #total=0
-        #for n in pago:
-        #    total = total + n.donate
+        context['totales'] = PagoPaypal.objects.values('Proyecto__titulo').annotate(Sum('donate'))
+        context['donadores'] = PagoPaypal.objects.values('Proyecto__titulo').annotate(num_donadores=Count('Proyecto__titulo'))
         return context
+
 
 def proyectoList3(request):
     proyectos = Proyecto.objects.all().order_by('-choice__votes')
-                
+    total = PagoPaypal.objects.values('Proyecto__titulo').annotate(Sum('donate'))
+    donador = PagoPaypal.objects.values('Proyecto__titulo').annotate(num_donadores=Count('Proyecto__titulo'))
+
     return render(request, 'proyecto/proyecto_list1.html',
         {
-            'proyectos': proyectos
+            'proyectos': proyectos,
+            'totales': total,#Esto es lo QuerySet
+            'donadores':donador,
+        #    'porcentajes':porcentaje,
         })
-        
 
+
+        #genders = Person.objects.values('gender').annotate(cnt=Count('gender')).order_by('gender')
+        #total_items = Person.objects.count()
+        #items = [
+        #    {'gender': g['gender'], 'value': g['cnt'] * 100 / total_items} for g in genders
+        #]
+        #return {'items': items}
 
 #class proyectoCreate(CreateView):
 #	model = Proyecto
 #	form_class = ProyectoForm
 #	template_name = 'proyecto/proyecto_form.html'
 #	success_url = reverse_lazy('proyecto:proyecto_listar')
+
 
 def publish(request):
     if request.method == 'POST':

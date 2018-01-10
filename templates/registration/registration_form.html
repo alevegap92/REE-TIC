@@ -8,7 +8,7 @@
 	<h2 class='text-align-center'><strong>Registrarte Gratis!</strong></h2><br/>
 <form method="post" action=".">
   {% csrf_token %}
-  {{ form|crispy }}
+  {{form.as_p }}
 
   <input class='btn btn-block btn-primary' type="submit" value="{% trans 'Registrarme' %}" />
 </form>

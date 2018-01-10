@@ -22,7 +22,7 @@ class PaypalView(RedirectView):
             "name":     str(Proyecto),
             "sku":      str(Proyecto.id),
             "price":    ('%.2f' % Proyecto.donate),
-            "currency": "EUR",
+            "currency": 'USD',
             "quantity": 1,
         })
         return items
@@ -45,7 +45,7 @@ class PaypalView(RedirectView):
                 # Amount
                 "amount": {
                     "total": ('%.2f' % Proyecto.donate),
-                    "currency": 'EUR'},
+                    "currency": 'USD'},
 
                 #Description
                 "description": str(Proyecto),}
@@ -96,8 +96,8 @@ class PaypalExecuteView(TemplateView):
         """Enviar Email con el proyecto al cliente """
         #TODO: adjuntar los archivos del modelo proyecto
         Proyecto = registro_pago.Proyecto
-        mensaje = "Gracias por su compra de %s" % Proyecto.titulo
-        send_mail('TiendaEbook', mensaje,
+        mensaje = "Gracias a tu donacion está mas cerca de cumplir su sueño el grupo de %s" % Proyecto.titulo
+        send_mail('Red de Emprendimiento Escolar [REE][CHL]', mensaje,
             from_email = settings.DEFAULT_FROM_EMAIL,
             recipient_list=[registro_pago.payer_email,])
 
@@ -133,7 +133,7 @@ class PaypalExecuteView(TemplateView):
 
 
 #--------Presentar datos en las Vista Template-----------------#
-
+#Nada funciona son solo ideas
 def intWithCommas(x):
     if x < 0:
         return '-' + intWithCommas(-x)
@@ -149,10 +149,15 @@ def get_context():
     #total_donadores = PagoPaypal.objects.filter(payer_email__pk = self.id).count()
     c = Context({
         'goal': intWithCommas(Proyecto.donate),
-        'Dnadores': PagoPaypal.objects.count(),
+        'Donadores': PagoPaypal.objects.count(),
         'pct': pct,
         'pct_disp': (int(pct) if total else 0),
         'total': (intWithCommas(int(total)) if total else '0'),
         })
     return c
    # return render(request, 'proyecto/proyecto_list.html', c)
+
+def get_total_pagos():
+    total = PagoPaypal.objects.values('Proyecto__titulo').annotate(Sum('donate'))
+    donadores = PagoPaypal.objects.values('Proyecto__titulo').count()
+    return total

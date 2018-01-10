@@ -48,21 +48,42 @@
                                 </button>
                 </form>
                 {% endif %}
+                {{context.donate_min}}
+                {{contex.donate}}
                 <div class="causes-details clearfix border-bottom p-15 pt-10">
                     <h5><a href="{% url 'proyecto:proyecto_detalle' proyecto.id %}">{{ proyecto.titulo }}</a></h5>
                     <p>{{ proyecto.descripcion_general }}</p>
 
-                    <ul class="list-inline clearfix mt-20">
-                    {%for context in object_list %}
-                        <li class="pull-left pr-0">{{context.donate}}</li>
-                        <li class="text-theme-colored pull-right pr-0">{{cl}}</li>
-                        {%endfor %}
-                    </ul>
+                   <ul class="list-inline clearfix mt-20">
+                        {% for total in totales %}
+
+                        {% if total.Proyecto__titulo == proyecto.titulo %}
+                               <li class="pull-left pr-0">Recaudado: {{total.donate__sum}}</li>
+                        {% endif %}
+
+                        {%  endfor %}
+                        <li class="text-theme-colored pull-right pr-0">Total: {{proyecto.donate}}</li>
                     
+                    </ul>
+{% load embed_video_tags %} 
+{% video proyecto.video as my_video %} 
+  URL: {{ my_video.url }}
+  Thumbnail: {{ my_video.thumbnail }}
+  Backend: {{ my_video.backend }}
+{% video my_video "large" %}
+{% endvideo %} 
+
                 </div>
                 <div class="mt-10">
                     <a class="btn btn-dark btn-theme-colored btn-flat btn-sm pull-left mt-10" href="#">Donate</a>
-                    <div class="pull-right mt-15"><i class="fa fa-heart-o text-theme-colored"></i> 89 Donors</div>
+                    <div class="pull-right mt-15"><i class="fa fa-heart-o text-theme-colored"></i>      {% for donador in donadores %}
+
+                        {% if donador.Proyecto__titulo == proyecto.titulo %}   
+                         {{donador.num_donadores}} Donadores 
+
+                        {% endif %}
+                    {%  endfor %}
+                    </div>
                 </div>
             </div>
 

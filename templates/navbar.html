@@ -16,7 +16,7 @@
                     <li><a href="#f">Financiamiento</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                                <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
                     <!--Futuros menus
       <li><a href="{% url 'proyecto:proyecto_listar0' %}">  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Proyectos</a></li>
     -->
@@ -72,7 +72,7 @@
                             <li><a href="{% url 'registration_register' %}"><span class="glyphicon glyphicon-user">Registrarte</span></a></li>
                             <!-- <li><a href="{% url 'auth_login' %}">Entrar</a></li> -->
                             {% endif %}
-                    </ul></li></ul></ul><
+                    </ul></li></ul></ul>
                     {% if not request.user.is_authenticated and not "/accounts/login" in request.get_full_path %}
                     <form class='navbar-form navbar-right' method='POST' action='{% url "auth_login" %}'>{% csrf_token %}
                         <div class='form-group'>

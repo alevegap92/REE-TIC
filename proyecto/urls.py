@@ -8,6 +8,12 @@ urlpatterns = [
     #url(r'^$', proyectoList.as_view(), name='proyecto_listar'),
     url(r'^$', views.proyectoList3, name='proyecto_listar'),
     url(r'^(?P<pk>\d+)$', proyectoDetail.as_view(), name='proyecto_detalle'),
+    url(r'^proyecto/(?P<pk>\d+)$', proyectoDetail2.as_view(
+      model=Proyecto,
+      template_name = 'proyecto/proyecto_detalle2.html',
+      context_object_name="proyecto_detalle",), 
+      name='proyecto_detalle2'),
+
     url(r'^todito/$', proyectoList2.as_view(
       model=Proyecto,
       template_name = 'proyecto/proyecto_list0.html',
