@@ -150,8 +150,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #-----------USUARIO AUTENTICADO----------------#
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ravp92@gmail.com'
-EMAIL_HOST_PASSWORD = '59897565323156rico'
+EMAIL_HOST_USER = '@gmail.com'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 '''
@@ -175,8 +175,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 PAYPAL_TEST = True
 PAYPAL_RECEIVER_EMAIL = "ravp92-facilitator@gmail.com"
 PAYPAL_MODE= 'sandbox'
-PAYPAL_CLIENT_ID  = 'AVAchGLEXuF6VKhhDqbx1sY9q_34eUZrgaFiVGcxApzIh5WRIyoUi2lEvZhNiYg8-WxHjJZXu6GdzcyQ'
-PAYPAL_CLIENT_SECRET = 'EOm-ghjTraylLU2e5GyWhG7-xOhssqn_4v8-qaC5vXSEAvlnXeoRXI3ELE7FXH_c7gxAine2KcDy9jvR'
+PAYPAL_CLIENT_ID  = ''
+PAYPAL_CLIENT_SECRET = ''
 #-----------PayPal----------------#
 #-----------Sitio ngrok----------------#
 SITE_URL = 'http://4fcd8c83.ngrok.io'
